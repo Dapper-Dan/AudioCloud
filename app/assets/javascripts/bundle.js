@@ -634,7 +634,7 @@ var Discover = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_song_part_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           song: song
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, trendingSongs.slice(8, 12).map(function (song) {
+      })), trendingSongs.length > 8 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, trendingSongs.slice(8, 12).map(function (song) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_song_part_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           song: song
         });
@@ -647,7 +647,7 @@ var Discover = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_song_part_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           song: song
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, trendingEDM.slice(4, 9).map(function (song) {
+      })), trendingEDM.length > 4 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, trendingEDM.slice(4, 9).map(function (song) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_song_part_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           song: song
         });
@@ -667,7 +667,7 @@ var Discover = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
           className: "discoverUserPart"
         }, user.display_name))));
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, recentUsers.slice(4, 9).map(function (user, i) {
+      })), recentUsers.length > 4 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, recentUsers.slice(4, 9).map(function (user, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "discoverNewUsersBox"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -687,7 +687,7 @@ var Discover = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_song_part_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           song: song
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, trendingJazz.slice(4, 9).map(function (song) {
+      })), trendingJazz.length > 8 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, trendingJazz.slice(4, 9).map(function (song) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_song_part_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           song: song
         });
@@ -700,7 +700,7 @@ var Discover = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_song_part_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           song: song
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, trendingHipHop.slice(4, 9).map(function (song) {
+      })), trendingHipHop.length > 4 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Carousel__WEBPACK_IMPORTED_MODULE_6__["default"].Item, null, trendingHipHop.slice(4, 9).map(function (song) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_song_part_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           song: song
         });
