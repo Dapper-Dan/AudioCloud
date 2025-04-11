@@ -28,8 +28,8 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Configure ActiveStorage for local storage
-  config.active_storage.service = :local
+  # Store uploaded files on Amazon S3
+  config.active_storage.service = :amazon
   config.active_storage.service_urls_expire_in = 1.hour
 
   # Don't care if the mailer can't send.
