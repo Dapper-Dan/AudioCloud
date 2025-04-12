@@ -26,3 +26,6 @@ bundle.js*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# ignore env
+.env
