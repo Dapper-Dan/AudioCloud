@@ -2606,7 +2606,7 @@ var Profile = /*#__PURE__*/function (_React$Component) {
         userEditButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           id: "userEditButton",
           onClick: this.handleUserClick
-        }, "Edit");
+        }, "Edit Profile");
       }
 
       var location;

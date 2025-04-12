@@ -31,7 +31,7 @@
   },
   "scripts": {
     "postinstall": "webpack",
-    "start": "webpack --mode=development --watch",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode=development --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

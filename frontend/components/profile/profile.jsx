@@ -277,7 +277,7 @@ class Profile extends React.Component {
         let userEditButton
         if (currentUserProfile) {
           userEditButton = (
-              <button id="userEditButton" onClick={this.handleUserClick}>Edit</button>
+              <button id="userEditButton" onClick={this.handleUserClick}>Edit Profile</button>
           );
         }
 
