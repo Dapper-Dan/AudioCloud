@@ -1,23 +1,18 @@
 .outtermost {
-    width: 85%;
+    width: 100%;
     margin: 0 auto;
-    display: block;
-    z-index: 9;
-    background-color: white;
-    overflow: hidden;
-    min-height: 100vh;
-    font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
     margin-top: 45px;
     padding-bottom: 50px;
 
-    @media (max-width:2000px) {
-        .outtermost {
-            width: 85%;
-            margin: 0 auto;
-            display: block;
-            background-color: white;
-            z-index: 9;
-        }
+    @media (min-width: 768px) {
+        width: 85%;
+        max-width: 1200px;
+        display: block;
+        z-index: 9;
+        background-color: white;
+        overflow: hidden;
+        min-height: 100vh;
+        font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif;
     }
 }
 
@@ -32,9 +27,14 @@
 
 .profile-songs {
     width: 100%;
-    color: red;
-    margin-top: 20px;
-    padding-bottom: 50px;
+    margin: 20px auto;
+    padding: 0 38px 50px;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .cover-photo {
@@ -65,7 +65,7 @@
     margin-left: 42px;
     display: flex;
     height: fit-content;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
 .info-basic a {
@@ -74,11 +74,11 @@
 
 .nameplate {
     color: #fff !important;
-    background-color: rgba(0,0,0,.8);
+    background-color: rgba(0, 0, 0, .8);
     padding: 5px;
     font-size: 24px;
     align-self: baseline;
-    white-space: nowrap;   
+    white-space: nowrap;
 }
 
 .nameplate#realName {
@@ -87,14 +87,10 @@
 
 .location-plate {
     color: #fff !important;
-    background-color: rgba(0,0,0,.8);
+    background-color: rgba(0, 0, 0, .8);
     white-space: nowrap;
     font-size: 16px;
     padding: 5px;
-}
-
-.profile-songs ul {
-    list-style-type: none;
 }
 
 .songProfileTile {
@@ -143,19 +139,33 @@
     margin-bottom: 4px;
 }
 
+.waveFormContainer {
+    position: relative;
+    width: 100%;
+    height: 84px;
+    overflow: hidden;
+}
+
 .waveFormImg {
-   margin-top: 7px;
-   position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
-.progressWaveFormImg {
-    margin-top: 7px;
-    filter: invert(51%) sepia(83%) saturate(1504%) hue-rotate(100deg) brightness(98%) contrast(77%);
-}
-
-.profile-song-info {
-    display: flex;
-    width: 681px;
+.progressWaveFormOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 2;
+    background-color: #1DB954;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    filter: saturate(100) brightness(0.6);
 }
 
 .profile-song-names-plate {
@@ -169,11 +179,8 @@
     display: flex;
     flex-direction: column;
     margin-left: 14px;
- 
-}
-
-.progressWaveFormContainer {
-    overflow: hidden;
+    width: 100%;
+    position: relative;
 }
 
 .songProgressTimer {
@@ -182,10 +189,17 @@
     width: fit-content;
     font-size: 11px;
     position: relative;
-    top: -52px;
     z-index: 99;
     padding: 0px 1px 0px 1px;
     font-size: 10px;
+}
+
+.songProgressTimerContainer {
+    position: absolute;
+    top: 89px;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
 }
 
 .songEndTimer {
@@ -194,8 +208,6 @@
     width: fit-content;
     font-size: 11px;
     position: relative;
-    top: -67px;
-    left: 657px;
     z-index: 99;
     padding: 0px 1px 0px 1px;
     font-size: 10px;
@@ -234,7 +246,8 @@
     filter: invert(59%) sepia(13%) saturate(2372%) hue-rotate(88deg) brightness(94%) contrast(94%);
 }
 
-.dateCreation,  .genreContainer {
+.dateCreation,
+.genreContainer {
     color: #999;
 }
 
@@ -257,6 +270,10 @@
 
 .profile-song-info {
     justify-content: space-between;
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 15px;
 }
 
 .playNameContainer {
@@ -329,7 +346,7 @@
     margin-bottom: auto;
     height: 535px;
     width: fit-content;
-    font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+    font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif;
     flex-direction: column;
     justify-content: inherit;
 }
@@ -418,7 +435,7 @@
 
 .profileNoSongs p {
     margin-bottom: 113px;
-    
+
 }
 
 .userEditFormBackground {

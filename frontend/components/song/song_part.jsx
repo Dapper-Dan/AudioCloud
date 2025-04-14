@@ -158,8 +158,7 @@ class SongPart extends React.Component {
       let progressWaveForm
       if (this.props.state.session.currentSong && this.props.song.songUrl === this.props.state.session.currentSong.songUrl) {
         progressWaveForm = (
-        <div className="progressWaveFormContainer" style={{width:`${this.state.currentTime}%`}}>
-          <img className="progressWaveFormImg" src={song.waveForm} />
+        <div className="progressWaveFormOverlay" style={{width:`${this.state.currentTime}%`}}>
         </div>
         )
       }
@@ -233,11 +232,13 @@ class SongPart extends React.Component {
                 <img className="waveFormImg" src={song.waveForm} />
                 {progressWaveForm}
               </div>
-              <div className="songProgressTimer">
-                {songProgressTime}
-              </div>
-              <div className="songEndTimer">
-                {endTime}
+              <div className="songProgressTimerContainer">
+                <div className="songProgressTimer">
+                  {songProgressTime}
+                </div>
+                <div className="songEndTimer">
+                  {endTime}
+                </div>
               </div>
               <a role="button" className="likeButton" id={likeButtonStyle} onClick={this.likeSong}><img src={window.heart} width="15px"></img>{totalLikes}</a>
             </div>

@@ -4862,14 +4862,11 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.state.session.currentSong && this.props.song.songUrl === this.props.state.session.currentSong.songUrl) {
         progressWaveForm = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "progressWaveFormContainer",
+          className: "progressWaveFormOverlay",
           style: {
             width: "".concat(this.state.currentTime, "%")
           }
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "progressWaveFormImg",
-          src: song.waveForm
-        }));
+        });
       }
 
       var creationTime;
@@ -4956,10 +4953,12 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
           className: "waveFormImg",
           src: song.waveForm
         }), progressWaveForm), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "songProgressTimerContainer"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "songProgressTimer"
         }, songProgressTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "songEndTimer"
-        }, endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        }, endTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           role: "button",
           className: "likeButton",
           id: likeButtonStyle,
