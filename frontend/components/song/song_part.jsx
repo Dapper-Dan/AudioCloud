@@ -203,9 +203,9 @@ class SongPart extends React.Component {
           }
           <div className="songProfileTile">
             {song.pictureUrl ? (
-                <img src={song.pictureUrl} height="180px" width="180px"/>
+                <img className="songProfileTileImg" src={song.pictureUrl} height="180px" width="180px"/>
             ) : (
-                <img src={window.songGradient} height="180px" width="180px" /> 
+                <img className="songProfileTileImg" src={window.songGradient} height="180px" width="180px" /> 
               
             )}
             <div className="songProfileTileContainer">

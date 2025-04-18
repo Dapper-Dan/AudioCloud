@@ -4912,10 +4912,12 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
         }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "songProfileTile"
         }, song.pictureUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "songProfileTileImg",
           src: song.pictureUrl,
           height: "180px",
           width: "180px"
         }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "songProfileTileImg",
           src: window.songGradient,
           height: "180px",
           width: "180px"
