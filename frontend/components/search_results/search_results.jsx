@@ -2,7 +2,6 @@ import React from 'react';
 import UserNavBarContainer from '../nav_bar/user_nav_bar_container';
 import NavBarContainer from '../nav_bar/nav_bar_container';
 import {Link} from 'react-router-dom';
-import SearchBarContainer from '../search_bar/search_bar_container';
 import SongPartContainer from '../song/song_part_container';
 
 export default class SearchResults extends React.Component {
@@ -155,7 +154,6 @@ export default class SearchResults extends React.Component {
             <div className="nav_bar_background" ></div>
             <div className="nav-con">
                 {this.props.currentUser ? <UserNavBarContainer/> : <NavBarContainer/>}
-                <SearchBarContainer/>
             </div>
             <div className="outtermost" >
                 <div className="searchHeader">{`Search results for "${searchInput}"`}</div>
