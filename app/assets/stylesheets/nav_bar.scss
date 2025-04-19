@@ -1,8 +1,7 @@
 .nav-con {
     top: 0;
     z-index: 9999;
-    height: 45px;
-    width: 85%;
+    width: 100%;
     margin: auto;
     position: fixed;
     justify-self: anchor-center;
@@ -37,15 +36,15 @@
 }
 
 .nav_buttons_container {
-    width: 45%;
+    width: 100%;
     height: 46px;
     display: flex;
     flex-direction: row;
     margin: 0 auto;
+    justify-content: space-between;
 }
 
 .left_nav {
-    position: absolute;
     left: 0px;
     height: 46px;
     display: flex;
@@ -57,19 +56,16 @@
         height: 46px;
         display: flex;
         flex-direction: row;
-        width: 85%;
-        margin: 0 auto;
     }
 }
 
 .nav-logo {
     height: 46px;
+    width: fit-content ;
 }
 
 .home-button {
     display: block;
-    padding: 12px 0;
-    width: 104px;
     height: 45px;
     border-right: 1px solid #111;
     box-sizing: border-box;
@@ -77,19 +73,28 @@
     background-color: #333;
     color: #ccc !important;
     cursor: pointer;
+
+    @media (min-width: 768px) {
+        padding: 12px 0;
+        width: 104px;
+    }
 }
 
 .library-button {
     display: block;
     padding: 12px 0;
-    width: 104px;
+    width: 75px;
     height: 45px;
-    border-right: 1px solid #111;
     box-sizing: border-box;
     text-align: center;
     background-color: #333;
     color: #ccc !important;
     cursor: pointer;
+
+    @media (min-width: 768px) {
+        width: 104px;
+        border-right: 1px solid #111;
+    }
 }
 
 .upload-button {
@@ -101,17 +106,23 @@
     color: #ccc !important;
     cursor: pointer;
     position: relative;
-    right: 98px;
+    margin-right: 16px;
+
+    @media (min-width: 768px) {
+    }
 }
 
 .right_nav {
-    position: absolute;
-    right: 0px;
     height: 46px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 18%;
+    justify-content: space-between;
+    padding-right: 16px;
+
+    @media (min-width: 768px) {
+        justify-content: unset;
+    }
 }
 
 .formModal {
@@ -215,7 +226,6 @@
     height: 40px;
     cursor: pointer;
     display: flex;
-    width: 57%;
     position: relative;
 }
 
@@ -241,11 +251,12 @@
 }
 
 .dropDownOptions {
+    z-index: 9999;
     width: 100%;
     flex: 0 0 100%;
     position: relative;
     top: 43px;
-    right: 91px;
+    right: 0px;
     border: 1px solid grey;
     border-radius: 0px 0px 7px 7px;
     background-color: white;
@@ -256,6 +267,7 @@
 }
 
 .dropDownUlContainer {
+    position: absolute;
     width: 100%;
     flex: 0 0 100%;
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import UserNavBarContainer from '../nav_bar/user_nav_bar_container';
 import {NavLink, Link} from 'react-router-dom';
-import SearchBarContainer from '../search_bar/search_bar_container';
 import SongPartContainer from '../song/song_part_container';
 
 export default class Library extends React.Component {
@@ -117,7 +116,6 @@ export default class Library extends React.Component {
             <div className="nav_bar_background" ></div>
             <div className="nav-con">
                 <UserNavBarContainer/>
-                <SearchBarContainer/>
             </div>
             <div className="outtermost" id="libraryOutter">
                 <div className="libraryNav">

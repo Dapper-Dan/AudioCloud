@@ -2,7 +2,6 @@ import React from 'react';
 import SongPartContainer from '../song/song_part_container';
 import NavBarContainer from '../nav_bar/nav_bar_container';
 import SongNavBarContainer from '../nav_bar/song_nav_bar_container';
-import SearchBarContainer from '../search_bar/search_bar_container';
 import UserNavBarContainer from '../nav_bar/user_nav_bar_container';
 
 class Profile extends React.Component {
@@ -394,7 +393,6 @@ class Profile extends React.Component {
           <div className="nav_bar_background" ></div>
           <div className="nav-con" >
             { this.props.sessionUser ? <UserNavBarContainer /> : <NavBarContainer /> }
-            <SearchBarContainer/>
           </div>
           <div className="outtermost" > 
             <div className="cover" >

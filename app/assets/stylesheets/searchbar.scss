@@ -41,6 +41,8 @@ ul.options li.option-active {
     border: none;
     background-color: #f3eded;
     outline: none;
+    text-overflow: ellipsis;
+    padding-right: 18px;
 }
 
 .options-drop {
@@ -54,18 +56,31 @@ ul.options li.option-active {
 
 .search-button {
     border: none;
-    position: relative;
-    top: -29px;
-    left: 93%;
+    position: absolute;
+    right: 19px;
     z-index: 901;
     outline: none !important;
+
+    @media (min-width: 768px) {
+        right: 1px;
+    }
 }
 
 .nav-con .searchBarContainer {
-    width: 35%;
     position: relative;
-    left: 403px;
-    top: -37px;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    background: #333;
+    height: 56px;
+    padding: 0 16px;
+
+    @media (min-width: 768px) {
+        width: 35%;
+        height: unset;
+        padding: 0;
+        margin: 0 8px;
+    }
 }
 
 .mainSearch .searchBarContainer {

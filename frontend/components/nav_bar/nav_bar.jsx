@@ -3,6 +3,7 @@ import { NavLink, Redirect, Link } from 'react-router-dom';
 import LoginFormContainer from '../session/login_form_container.jsx';
 import SignupFormContainer from '../session/signup_form_container.jsx';
 import ReactDOM from 'react-dom';
+import SearchBarContainer from '../search_bar/search_bar_container.jsx';
 
 
 
@@ -15,7 +16,8 @@ export default class NavBar extends React.Component {
             showModal: false,
             showDropDown: false,
             redirect: false,
-            logoutModal: false
+            logoutModal: false,
+            isMobile: window.innerWidth < 768
         };
 
         this.loginModelShow = this.loginModelShow.bind(this);
@@ -24,15 +26,18 @@ export default class NavBar extends React.Component {
         this.logout = this.logout.bind(this);
         this.handleDropDown = this.handleDropDown.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
+        this.handleResize = this.handleResize.bind(this);
     }
 
     componentDidMount() {
         if(this.props.state && this.props.state.session.currentUser)  this.props.fetchUser(this.props.state.session.currentUser.id)
         document.addEventListener('click', this.handleClickOutside, true);
+        window.addEventListener('resize', this.handleResize);
     }
 
     componentWillUnmount() {
         document.removeEventListener('click', this.handleClickOutside, true);
+        window.removeEventListener('resize', this.handleResize);
     }
 
     componentDidUpdate() {
@@ -77,6 +82,12 @@ export default class NavBar extends React.Component {
         if (!domNode || !domNode.contains(event.target)) {
             this.setState({ showDropDown: false })
         }
+    }
+
+    handleResize() {
+        this.setState({
+            isMobile: window.innerWidth < 768
+        });
     }
 
     render() {
@@ -140,22 +151,33 @@ export default class NavBar extends React.Component {
         switch(this.props.navType) {
             case 'default':
             return (
-                <div className="nav_bar">
-                    {sessionModal}
-                    <div className="nav_buttons_container" >
-                        <nav className="left_nav">
-                            <img src={window.greenLogo} width="184px" className="nav-logo"/>
-                            <NavLink to="/discover" className="home-button" style={{ textDecoration: 'none' }}>   
-                                Home
-                            </NavLink>
-                            <a className="library-button" onClick={ this.registerModelShow}>Library</a>
-                        </nav>
-                        <nav className="right_nav">
-                            <button className="login-modal-button" onClick={ this.loginModelShow }> Sign in </button>
-                            <button className="signup-modal-button" onClick={ this.registerModelShow }> Create account</button>
-                        </nav>
+                <>
+                    <div className="nav_bar_background">
+                        <div className="nav-con">
+                            <div className="nav_bar">
+                                {sessionModal}
+                                <div className="nav_buttons_container" >
+                                    <nav className="left_nav">
+                                        <img src={window.greenLogo} width="184px" className="nav-logo d-none d-md-block"/>
+                                        <NavLink to="/discover" className="home-button d-md-none" style={{ textDecoration: 'none' }}>   
+                                            <img src={window.greenLogoMobile} className='nav-logo' width="184px"/>
+                                        </NavLink>
+                                        <NavLink to="/discover" className="home-button d-none d-md-block" style={{ textDecoration: 'none' }}>   
+                                            Home
+                                        </NavLink>
+                                        <a className="library-button" onClick={ this.registerModelShow}>Library</a>
+                                    </nav>
+                                    {!this.state.isMobile && <SearchBarContainer/>}
+                                    <nav className="right_nav">
+                                        <button className="login-modal-button" onClick={ this.loginModelShow }> Sign in </button>
+                                        <button className="signup-modal-button" onClick={ this.registerModelShow }> Create account</button>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    {this.state.isMobile && <SearchBarContainer/>}
+                </>
             );
 
             case 'song':
@@ -166,17 +188,22 @@ export default class NavBar extends React.Component {
 
             case 'user':
             return (
+                <>
                 <div className="nav_bar">
                     <div className="nav_buttons_container" >
                         <nav className="left_nav">
-                            <img src={window.greenLogo} width="184px" className="nav-logo"/>
-                            <NavLink to="/discover" className="home-button" style={{ textDecoration: 'none' }}>   
+                            <img src={window.greenLogo} width="184px" className="nav-logo d-none d-md-block"/>
+                            <NavLink to="/discover" className="home-button d-md-none" style={{ textDecoration: 'none' }}>   
+                                <img src={window.greenLogoMobile} className='nav-logo' width="184px"/>
+                            </NavLink>
+                            <NavLink to="/discover" className="home-button d-none d-md-block" style={{ textDecoration: 'none' }}>   
                                 Home
                             </NavLink>
                             <NavLink to="/library" className="library-button" style={{ textDecoration: 'none' }}>
                                Library
                             </NavLink>
                         </nav>
+                        {!this.state.isMobile && <SearchBarContainer/>}
                         <nav className="right_nav">
                             <NavLink to="/upload" className="upload-button" style={{ textDecoration: 'none' }} >
                                Upload 
@@ -190,6 +217,8 @@ export default class NavBar extends React.Component {
                         </nav>
                     </div>
                 </div>
+                {this.state.isMobile && <SearchBarContainer/>}
+                </>
             );
         } 
     }

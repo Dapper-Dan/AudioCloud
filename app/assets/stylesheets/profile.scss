@@ -1,7 +1,7 @@
 .outtermost {
     width: 100%;
     margin: 0 auto;
-    margin-top: 45px;
+    margin-top: 101px;
     padding-bottom: 50px;
     position: relative;
     display: flex;
@@ -15,6 +15,7 @@
         max-width: 1200px;
         overflow: hidden;
         min-height: 100vh;
+        margin-top: 45px;
     }
 }
 
