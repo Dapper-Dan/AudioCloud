@@ -111,9 +111,10 @@ class SongPart extends React.Component {
 
     waveformClick(e) {
       let waveFormContainer = e.currentTarget;
-      let divAdjust = e.pageX - waveFormContainer.offsetLeft;
+      let rect = waveFormContainer.getBoundingClientRect();
+      let clickX = e.clientX - rect.left;
       let audioEle = document.getElementById('myAudio');
-      audioEle.currentTime = Math.floor((divAdjust / waveFormContainer.offsetWidth) * audioEle.duration);
+      audioEle.currentTime = Math.floor((clickX / rect.width) * audioEle.duration);
     }
 
     render() {

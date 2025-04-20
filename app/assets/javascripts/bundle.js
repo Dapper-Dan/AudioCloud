@@ -4850,9 +4850,10 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
     key: "waveformClick",
     value: function waveformClick(e) {
       var waveFormContainer = e.currentTarget;
-      var divAdjust = e.pageX - waveFormContainer.offsetLeft;
+      var rect = waveFormContainer.getBoundingClientRect();
+      var clickX = e.clientX - rect.left;
       var audioEle = document.getElementById('myAudio');
-      audioEle.currentTime = Math.floor(divAdjust / waveFormContainer.offsetWidth * audioEle.duration);
+      audioEle.currentTime = Math.floor(clickX / rect.width * audioEle.duration);
     }
   }, {
     key: "render",
