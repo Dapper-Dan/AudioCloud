@@ -86,9 +86,11 @@
     display: flex;
     height: fit-content;
     flex-direction: column;
+    margin-top: 23px;
 
     @media (min-width: 768px) {
         margin-left: 42px;
+        margin-top: 0;
     }
 }
 
@@ -408,19 +410,26 @@
     margin: auto;
     margin-top: 89px;
     margin-bottom: auto;
-    height: 535px;
-    width: fit-content;
+    width: 90%;
     font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif;
     flex-direction: column;
     justify-content: inherit;
+
+    @media (min-width: 768px) {
+        max-width: 740px;
+        width: 100%;
+        height: 535px;
+    }
 }
 
 .userEditInfoBox {
-    margin: auto;
-    margin-left: 27px;
+    margin-left: 16px;
     margin-top: 20px;
-    margin-right: 23px;
-    width: 416px;
+    margin-bottom: 24px;
+
+    @media (min-width: 768px) {
+        margin: 20px 23px 0 27px;
+    }
 }
 
 .userEditInfoBox input {
@@ -434,38 +443,72 @@
 
 .userEditWrapper {
     display: flex;
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
 }
 
 .userEditHeader {
     border-bottom: 2px solid #f2f2f2;
-    margin-left: 23px;
-    margin-right: 25px;
-    margin-top: 22px;
+    margin: 22px auto 0;
     font-size: 24px;
+
+    @media (min-width: 768px) {
+        margin-left: 23px;
+        margin-right: 25px;
+        margin-top: 22px;
+    }
 }
 
 .userEditInfoBox .displayNameInput {
     height: 36px;
     width: inherit;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
+
+    @media (min-width: 768px) {
+        margin-bottom: 40px;
+    }
 }
 
 .locationWrapper {
     display: flex;
-    margin-bottom: 58px;
+    margin-bottom: 24px;
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        margin-bottom: 58px;
+    }
 }
 
 .locationCountryWrapper {
-    margin-left: 29px;
+    margin-top: 20px;
+
+    @media (min-width: 768px) {
+        margin-left: 29px;
+        margin-top: 0;
+    }
 }
 
 .nameWrapper {
     display: flex;
     margin-bottom: 14px;
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
 }
 
 .lastNameWrapper {
-    margin-left: 29px;
+    margin-top: 20px;
+
+    @media (min-width: 768px) {
+        margin-left: 29px;
+        margin-top: 0;
+    }
 }
 
 .userEditForm .songFormCancelButton {
@@ -483,7 +526,7 @@
     width: fit-content;
     align-self: flex-end;
     margin-right: 16px;
-    margin-top: 110px;
+    margin-top: 136px;
 
     @media (min-width: 768px) {
         margin-right: 41px;

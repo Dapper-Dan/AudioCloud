@@ -326,7 +326,7 @@ class Profile extends React.Component {
                   {this.props.currentUser ? <img src={this.props.currentUser.profilePicUrl} width="250px" height="250px" ></img> : ""}
                 </div>
                 <div className="userEditInfoBox">
-                  <h3>Display name</h3>
+                  <h3 className='font-weight-bold'>Display name</h3>
                   <input 
                         className="displayNameInput"
                         placeholder={this.props.currentUser.display_name}
@@ -336,7 +336,7 @@ class Profile extends React.Component {
                   /> 
                   <div className="locationWrapper">
                     <div className="locationCityWrapper">
-                      <h3>City</h3>
+                      <h3 className='font-weight-bold'>City</h3>
                       <input 
                         className="cityInput"
                         placeholder={this.props.currentUser.city}
@@ -346,7 +346,7 @@ class Profile extends React.Component {
                       />
                     </div> 
                     <div className="locationCountryWrapper">
-                      <h3>Country</h3>
+                      <h3 className='font-weight-bold'>Country</h3>
                       <input 
                         className="countryInput"
                         placeholder={this.props.currentUser.country}
@@ -358,7 +358,7 @@ class Profile extends React.Component {
                   </div>
                   <div className="nameWrapper">
                     <div className="firstNameWrapper" >
-                      <h3>First name</h3>
+                      <h3 className='font-weight-bold'>First name</h3>
                       <input 
                         className="firstNameInput"
                         placeholder={this.props.currentUser.first_name}
@@ -368,7 +368,7 @@ class Profile extends React.Component {
                       />
                     </div> 
                     <div className="lastNameWrapper">
-                      <h3>Last name</h3>
+                      <h3 className='font-weight-bold'>Last name</h3>
                       <input 
                         className="lastNameInput"
                         placeholder={this.props.currentUser.last_name}

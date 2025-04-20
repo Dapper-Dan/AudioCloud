@@ -380,9 +380,13 @@
 
 .picUploadBox {
     display: flex;
-    margin-left: 23px;
-    margin-top: 20px;
+    margin: 20px auto 0;
     flex-direction: column;
+
+    @media (min-width: 768px) {
+        margin-left: 23px;
+        margin-top: 20px;
+    }
 }
 
 .songUploadInfo .descriptionInput {
