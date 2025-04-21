@@ -212,7 +212,7 @@ class MusicPlayer extends React.Component {
         }
 
         let volumeRange = (
-            <div id="volRangeContainer" onMouseOver={this.handleMouseOver} onMouseLeave={this.handleMouseLeave} style={!this.state.showVolume ? {visibility: "hidden"} : {visibility: "visible"}}>
+            <div id="volRangeContainer" className='d-none d-md-flex' onMouseOver={this.handleMouseOver} onMouseLeave={this.handleMouseLeave} style={!this.state.showVolume ? {visibility: "hidden"} : {visibility: "visible"}}>
                 <input type="range" onChange={(e) => {this.changeVolume(e)}} id="vol" name="vol" min="0" max="1" step=".05" value={this.state.volume}  ></input>
             </div>
         );
@@ -262,8 +262,23 @@ class MusicPlayer extends React.Component {
             return (
                 <>
                 <div className="media-player-container">
-                    <div className="song-progress-bar-container"> 
+                    <div className="d-flex d-md-none mobile-only-upper-song-container">
+                        <div className="artist-info" >
+                            <img className="song-pic" src={song_pic} width="40px" height="40px"/>
+                            <div className="artist-small-info">
+                                <p className="artist-name">{artist_name}</p>
+                                <p className="song-title">{song_title}</p>
+                            </div>
+                        </div> 
                         <div className="button-container">
+                            <button className="play-button m-0" data-playing="false" role="switch" aria-checked="false" onClick={this.play}>
+                                <img src={playPause} width="21px"/>
+                            </button>
+                            <img src={window.heart} onClick={this.likeSong} className="heartMedia" id={likeButtonStyle} width="25px" />
+                        </div>
+                    </div>
+                    <div className="song-progress-bar-container"> 
+                        <div className="button-container d-none d-md-flex">
                             <img onClick={this.prevQueue} src={window.back} width="21px"/>
                             <button className="play-button" data-playing="false" role="switch" aria-checked="false" onClick={this.play}>
                                 <img src={playPause} width="21px"/>
@@ -284,9 +299,9 @@ class MusicPlayer extends React.Component {
                         <div className="end-time">
                             {endTime}
                         </div>
-                        <img src={window.audio} className="audioButton" width="21px" onMouseOver={this.handleMouseOver} />
+                        <img src={window.audio} className="audioButton d-none d-md-flex" width="21px" onMouseOver={this.handleMouseOver} />
                         {volumeRange}
-                        <div className="artist-info" >
+                        <div className="artist-info d-none d-md-flex" >
                             <img className="song-pic" src={song_pic} width="40px" height="40px"/>
                             <div className="artist-small-info">
                                 <p className="artist-name">{artist_name}</p>

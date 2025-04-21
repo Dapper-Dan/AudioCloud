@@ -1576,6 +1576,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
       var volumeRange = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "volRangeContainer",
+        className: "d-none d-md-flex",
         onMouseOver: this.handleMouseOver,
         onMouseLeave: this.handleMouseLeave,
         style: !this.state.showVolume ? {
@@ -1641,9 +1642,41 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "media-player-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "d-flex d-md-none mobile-only-upper-song-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "artist-info"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "song-pic",
+          src: song_pic,
+          width: "40px",
+          height: "40px"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "artist-small-info"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "artist-name"
+        }, artist_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "song-title"
+        }, song_title))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "button-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "play-button m-0",
+          "data-playing": "false",
+          role: "switch",
+          "aria-checked": "false",
+          onClick: this.play
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: playPause,
+          width: "21px"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: window.heart,
+          onClick: this.likeSong,
+          className: "heartMedia",
+          id: likeButtonStyle,
+          width: "25px"
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "song-progress-bar-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "button-container"
+          className: "button-container d-none d-md-flex"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           onClick: this.prevQueue,
           src: window.back,
@@ -1687,11 +1720,11 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           className: "end-time"
         }, endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: window.audio,
-          className: "audioButton",
+          className: "audioButton d-none d-md-flex",
           width: "21px",
           onMouseOver: this.handleMouseOver
         }), volumeRange, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "artist-info"
+          className: "artist-info d-none d-md-flex"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "song-pic",
           src: song_pic,
