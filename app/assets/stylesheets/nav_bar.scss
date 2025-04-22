@@ -335,11 +335,16 @@
     flex-direction: column;
     justify-content: center;
     margin: auto;
-    margin-top: auto;
+    margin-top: 110px;
     margin-bottom: auto;
     height: 535px;
-    width: 60%;
+    width: 90%;
     font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif;
+
+    @media (min-width: 768px) {
+        width: 60%;
+        margin-top: auto;
+    }
 }
 
 .songUpload-form#songInfo {

@@ -29,3 +29,7 @@ bundle.js*
 
 # ignore env
 .env
+
+# bundle
+bundle.js
+bundle.js.map

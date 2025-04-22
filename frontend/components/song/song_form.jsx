@@ -210,7 +210,7 @@ class SongForm extends React.Component {
           <div className="nav-con">
             <UserNavBarContainer /> 
           </div>
-          <div className="outtermost"> 
+          <div className="outtermost song-upload-container"> 
             <div className="songFormBackGround">
               <div className="songUpload-form" onDragEnter={this.dragIn}>
                 <h1> Drag and drop your tracks here </h1>
