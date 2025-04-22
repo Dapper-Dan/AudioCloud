@@ -1,12 +1,17 @@
 .scroll-playlists {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    padding-right: 30px;
 }
 
 .discover2blocks {
     display: flex;
-    margin-left: 30px;
+    padding-left: 30px;
     margin-top: 30px;
+    width: 100%;
+    max-width: 1500px;
+    margin: 30px auto 0;
 }
 
 .carousel-item-next, .carousel-item-prev, .carousel-item.active {
@@ -14,7 +19,7 @@
 }
 
 #discoverCaro {
-    width: 880px;
+    width: 100%;
     padding-bottom: 30px;
     margin-right: 36px;
 }
@@ -113,6 +118,7 @@
     flex-direction: column;
     border-left: 2px solid #f2f2f2;
     width: 100%;
+    max-width: 30%;
 }
 
 .sideBar p {
@@ -132,9 +138,68 @@
 }
 
 .sideBarCreatorContainer {
-    position: fixed;
     display: flex;
     flex-direction: column;
-    width: 285px;
+    width: 100%;
 }
-    
+
+.slick-slide {
+    width: fit-content !important;
+}
+
+.slick-arrow {
+    &.slick-disabled {
+        opacity: 0 !important;
+    }
+}
+
+.discover-slider {
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 32px;
+    border-bottom: 2px solid #f2f2f2;
+
+    .slick-track {
+        display: flex !important;
+        margin-left: 0;
+    }
+
+    .slick-slide {
+        height: inherit !important;
+        width: 180px !important;
+        margin-right: 16px;
+        
+        > div {
+            height: 100%;
+        }
+    }
+}
+
+// Slick arrow styles
+.slick-prev,
+.slick-next {
+    top: 78px !important;
+    width: 35px !important;
+    height: 35px !important;
+    background: white !important;
+    border: 1px solid #1DB954 !important;
+    border-radius: 5px !important;
+    z-index: 1;
+
+    &:before {
+        color: #1DB954 !important;
+        opacity: 1 !important;
+    }
+
+    &:hover {
+        background: white !important;
+    }
+}
+
+.slick-prev {
+    left: -20px !important;
+}
+
+.slick-next {
+    right: -20px !important;
+}

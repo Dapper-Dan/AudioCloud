@@ -3,7 +3,7 @@ import UserNavBarContainer from '../nav_bar/user_nav_bar_container';
 import NavBarContainer from '../nav_bar/nav_bar_container';
 import {Link} from 'react-router-dom';
 import SongPartContainer from '../song/song_part_container';
-import Carousel from 'react-bootstrap/Carousel';
+import Slider from 'react-slick';
 
 
 export default class Discover extends React.Component {
@@ -71,6 +71,52 @@ export default class Discover extends React.Component {
         } else {
             recentUsers = this.getRecentUsers(this.props.users)
         }
+
+        const settings = {
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            arrows: true,
+            prevArrow: <button className="slick-prev">Previous</button>,
+            nextArrow: <button className="slick-next">Next</button>,
+            variableWidth: true,
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
+                        variableWidth: true
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        variableWidth: true
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        variableWidth: true
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        variableWidth: true
+                    }
+                }
+            ]
+        };
         
         return(
             <>
@@ -83,113 +129,58 @@ export default class Discover extends React.Component {
                     <div className="scroll-playlists">
                         <h3>AudioCloud: Trending</h3>
                         <p>Up-and-coming tracks on AudioCloud</p>
-                        <Carousel controls={true} interval="9999999999" id="discoverCaro" wrap={false} >
-                            <Carousel.Item>
-                                {trendingSongs.slice(0, 5).map((song) => ( 
+                        <Slider {...settings} className="discover-slider">
+                            {trendingSongs.map((song, index) => (
+                                <div key={index}>
                                     <SongPartContainer song={song} />
-                                ))}
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                {trendingSongs.slice(4, 9).map((song) => ( 
-                                    <SongPartContainer song={song} />
-                                ))}
-                            </Carousel.Item>
-                            {trendingSongs.length > 8 &&
-                                <Carousel.Item>
-                                    {trendingSongs.slice(8, 12).map((song) => ( 
-                                        <SongPartContainer song={song} />
-                                    ))}
-                                </Carousel.Item>
-                            }
-                        </Carousel>
+                                </div>
+                            ))}
+                        </Slider>
+
                         <h3>Electric Dreams</h3>
                         <p>The latest and hottest EDM</p>
-                        <Carousel controls={true} interval="9999999999" id="discoverCaro" wrap={false} >
-                            <Carousel.Item>
-                                {trendingEDM.slice(0, 5).map((song) => ( 
+                        <Slider {...settings} className="discover-slider">
+                            {trendingEDM.map((song, index) => (
+                                <div key={index}>
                                     <SongPartContainer song={song} />
-                                ))}
-                            </Carousel.Item>
-                            {trendingEDM.length > 4 &&
-                                <Carousel.Item>
-                                    {trendingEDM.slice(4, 9).map((song) => ( 
-                                        <SongPartContainer song={song} />
-            
-                                    ))}
-                                </Carousel.Item>
-                            }
-                        </Carousel>
+                                </div>
+                            ))}
+                        </Slider>
+
                         <h3>Next Set</h3>
                         <p>New talented artists to follow</p>
-                        <Carousel controls={true} interval="9999999999" id="discoverCaro" wrap={false} >
-                            <Carousel.Item>
-                                {recentUsers.slice(0, 5).map((user) => ( 
-                                    <>
+                        <Slider {...settings} className="discover-slider">
+                            {recentUsers.map((user, index) => (
+                                <div key={index}>
                                     <div className="discoverNewUsersBox">
-                                        <img id="profilePic"  src={user.profilePicUrl} /> 
+                                        <img id="profilePic" src={user.profilePicUrl} /> 
                                         <Link to={`/${user.display_name}`}>
                                             <h1 className="discoverUserPart">{user.display_name}</h1>
                                         </Link>
                                     </div>
-                                    </>
-                                ))}
-                            </Carousel.Item>
-                            {recentUsers.length > 4 &&
-                                <Carousel.Item>
-                                    {recentUsers.slice(4, 9).map((user, i) => ( 
-                                        <>
-                                        <div className="discoverNewUsersBox">
-                                            <img id="profilePic"  src={user.profilePicUrl} /> 
-                                            <Link to={`/${user.display_name}`}>
-                                                <h1 className="discoverUserPart">{user.display_name}</h1>
-                                            </Link>
-                                        </div>
-                                        </>
-                                    ))}
-                                </Carousel.Item>
-                            }
-                        </Carousel>
+                                </div>
+                            ))}
+                        </Slider>
+
                         <h3>Scooby Dooby Doo Bop</h3>
                         <p>Fresh smooth jazz</p>
-                        <Carousel controls={true} interval="9999999999" id="discoverCaro" wrap={false} >
-                            <Carousel.Item>
-                                {trendingJazz.slice(0, 5).map((song) => ( 
+                        <Slider {...settings} className="discover-slider">
+                            {trendingJazz.map((song, index) => (
+                                <div key={index}>
                                     <SongPartContainer song={song} />
-                                ))}
-                            </Carousel.Item>
-                            {trendingJazz.length > 8 &&
-                                <Carousel.Item>
-                                    {trendingJazz.slice(4, 9).map((song) => ( 
-                                        <SongPartContainer song={song} />
-                                    ))}
-                                </Carousel.Item>
-                            }
-                        </Carousel>
+                                </div>
+                            ))}
+                        </Slider>
+
                         <h3>Hip Hoppotamus</h3>
                         <p>The hottest and hippest hip-hop</p>
-                        <Carousel controls={true} interval="9999999999" id="discoverCaro" wrap={false} >
-                            <Carousel.Item>
-                                {trendingHipHop.slice(0, 5).map((song) => ( 
+                        <Slider {...settings} className="discover-slider">
+                            {trendingHipHop.map((song, index) => (
+                                <div key={index}>
                                     <SongPartContainer song={song} />
-                                ))}
-                            </Carousel.Item>
-                            {trendingHipHop.length > 4 &&
-                                <Carousel.Item>
-                                    {trendingHipHop.slice(4, 9).map((song) => ( 
-                                        <SongPartContainer song={song} />
-                                    ))}
-                                </Carousel.Item>
-                            }
-                        </Carousel>
-                    </div>
-                    <div className="sideBar" >
-                        <div className="sideBarCreatorContainer">
-                            <p>Message from the creator:</p>
-                            <img id="profilePic"  src={window.myPic} />
-                            <p id="discoverThanks">Hope you're enjoying the site. If you would like to see more of my work or know more about me, check out my GitHub or LinkedIn.</p>   
-                            <a className="signup-modal-button" id="discoverGitHub" href={"https://github.com/Dapper-Dan/AudioCloud"}>GitHub</a>
-                            <a className="signup-modal-button" id="discoverLinked" href={"https://www.linkedin.com/in/daniel-r-lancaster/"}>LinkedIn</a>
-                        </div>
+                                </div>
+                            ))}
+                        </Slider>
                     </div>
                 </div>
             </div>
