@@ -157,8 +157,8 @@ export default class SearchResults extends React.Component {
             </div>
             <div className="outtermost" >
                 <div className="searchHeader">{`Search results for "${searchInput}"`}</div>
-                <div className="mainSearchSplit">
-                    <div className="searchLeftSideBar">
+                <div className="mainSearchSplit flex-column flex-md-row">
+                    <div className="searchLeftSideBar d-flex flex-row flex-md-column">
                         <h3 className="everythingButton" id={everythingStyle} onClick={this.changeShow}><img id="profileIcon" src={window.searchButton}/>Everything</h3>
                         <h3 className="usersButton" id={usersStyle} onClick={this.changeShow}><img id="profileIcon" src={window.profileIcon}/>Users</h3>
                         <h3 className="tracksButton" id={tracksStyle} onClick={this.changeShow}><img id="trackIcon" src={window.trackIcon}/>Tracks</h3>
