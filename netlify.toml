@@ -1,5 +1,5 @@
 [build]
-  command = "bundle install && bundle exec rails assets:precompile && bundle exec rails db:migrate"
+  command = "apt-get update && apt-get install -y libpq-dev && bundle config force_ruby_platform true && bundle install && bundle exec rails assets:precompile && bundle exec rails db:migrate"
   publish = "public"
 
 [build.environment]
@@ -11,6 +11,12 @@
   PGDATABASE = "dummy"
   PGHOST = "dummy"
   DATABASE_URL = "postgresql://dummy:dummy@dummy/dummy"
+  # Force platform-specific gem installation
+  BUNDLE_FORCE_RUBY_PLATFORM = "true"
+  # Enable debug mode
+  NETLIFY_BUILD_DEBUG = "true"
+  # Development tools
+  BUILD_DEVELOPMENT_TOOLS = "true"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
