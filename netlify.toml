@@ -1,12 +1,10 @@
 [build]
-  command = """
-    nix-shell -p postgresql pkgconfig --run "bundle install && bundle exec rake assets:precompile"
-  """
+  command = "bundle install && bundle exec rails assets:precompile && bundle exec rails db:migrate"
   publish = "public"
 
 [build.environment]
   NODE_VERSION = "18"
-  RUBY_VERSION = "2.7.8"
+  RUBY_VERSION = "3.1.2"
   # PostgreSQL build configuration
   PGUSER = "dummy"
   PGPASSWORD = "dummy"
@@ -15,4 +13,18 @@
   DATABASE_URL = "postgresql://dummy:dummy@dummy/dummy"
 
 [[plugins]]
-  package = "@netlify/plugin-nextjs" 
+  package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.amazonaws.com *.cloudfront.net; img-src 'self' data: blob: *.amazonaws.com *.cloudfront.net; media-src 'self' data: blob: *.amazonaws.com *.cloudfront.net;" 
