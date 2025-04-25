@@ -4279,8 +4279,9 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
       currentTime: 0,
       songTime: "0:00",
       loading: true,
-      playing: false,
-      showSignUp: false
+      showSignUp: false,
+      wasLastInteracted: false,
+      isHovered: false
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.play = _this.play.bind(_assertThisInitialized(_this));
@@ -4293,16 +4294,26 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
     key: "play",
     value: function play() {
       var audioEle = document.getElementById('myAudio');
-      if (!this.state.playing) {
-        audioEle.play();
-        this.setState({
-          playing: true
+      this.setState({
+        wasLastInteracted: true
+      });
+      if (window.lastInteractedTile && window.lastInteractedTile !== this) {
+        window.lastInteractedTile.setState({
+          wasLastInteracted: false
         });
-      } else if (this.state.playing) {
-        audioEle.pause();
-        this.setState({
-          playing: false
-        });
+      }
+      window.lastInteractedTile = this;
+      if (this.props.currentSong && this.props.currentSong.id === this.props.song.id) {
+        if (audioEle.paused) {
+          audioEle.play();
+        } else {
+          audioEle.pause();
+        }
+      } else {
+        this.props.getSong(this.props.song.id);
+        setTimeout(function () {
+          return audioEle.play();
+        }, 300);
       }
     }
   }, {
@@ -4346,9 +4357,7 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleClick",
     value: function handleClick() {
-      var song = this.props.song;
-      this.props.getSong(song.id);
-      setTimeout(this.play, 300);
+      this.play();
     }
   }, {
     key: "componentDidUpdate",
@@ -4399,13 +4408,15 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getPausedPlay",
     value: function getPausedPlay() {
-      if (this.props.currentSong) {
-        if (this.props.currentSong.id !== this.props.song.id) {
-          return "play";
-        }
+      var audioEle = document.getElementById('myAudio');
+      var isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
+      if (!isCurrentSong) {
+        return this.state.isHovered ? "play" : "";
       }
-      if (this.state.playing) return "pause";
-      if (!this.state.playing) return "play";
+      if (audioEle && !audioEle.paused) {
+        return !this.state.wasLastInteracted && !this.state.isHovered ? "" : "pause";
+      }
+      return "play";
     }
   }, {
     key: "changeShow",
@@ -4426,6 +4437,7 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
       if (!this.props.song || this.state.loading) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "loading...");
       }
@@ -4478,7 +4490,17 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
       }
       if (!this.props.profile) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "songTile"
+          className: "songTile",
+          onMouseEnter: function onMouseEnter() {
+            return _this3.setState({
+              isHovered: true
+            });
+          },
+          onMouseLeave: function onMouseLeave() {
+            return _this3.setState({
+              isHovered: false
+            });
+          }
         }, song.pictureUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: song.pictureUrl,
           height: "180px",
@@ -4506,7 +4528,17 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_session_signup_form_container_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
           changeShow: this.changeShow
         }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "songProfileTile"
+          className: "songProfileTile",
+          onMouseEnter: function onMouseEnter() {
+            return _this3.setState({
+              isHovered: true
+            });
+          },
+          onMouseLeave: function onMouseLeave() {
+            return _this3.setState({
+              isHovered: false
+            });
+          }
         }, song.pictureUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "songProfileTileImg",
           src: song.pictureUrl,

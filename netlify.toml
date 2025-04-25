@@ -1,16 +1,13 @@
 [build]
-  command = """
-    sudo apt-get update -qq && \
-    sudo apt-get install -y postgresql-client libpq-dev && \
-    bundle install && \
-    bundle exec rake assets:precompile && \
-    bundle exec rake db:migrate
-  """
+  command = "./netlify/build.sh"
   publish = "public"
 
 [build.environment]
   NODE_VERSION = "18"
   RUBY_VERSION = "2.7.8"
+  # Add PostgreSQL build dependencies
+  NIXPKGS_ALLOW_UNFREE = "1"
+  DATABASE_URL = "postgresql://dummy:dummy@dummy/dummy"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs" 
