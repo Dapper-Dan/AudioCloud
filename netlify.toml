@@ -1,12 +1,24 @@
 [build]
-  command = "./netlify/build.sh"
+  command = """
+    curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /usr/share/keyrings/postgresql-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/postgresql-keyring.gpg] http://apt.postgresql.org/pub/repos/apt/ noble-pgdg main" > /etc/apt/sources.list.d/postgresql.list && \
+    apt-get update && \
+    apt-get install -y libpq-dev && \
+    bundle config build.pg --with-pg-lib=/usr/lib/x86_64-linux-gnu --with-pg-include=/usr/include/postgresql && \
+    bundle install && \
+    bundle exec rake assets:precompile && \
+    bundle exec rake db:migrate
+  """
   publish = "public"
 
 [build.environment]
   NODE_VERSION = "18"
   RUBY_VERSION = "2.7.8"
-  # Add PostgreSQL build dependencies
-  NIXPKGS_ALLOW_UNFREE = "1"
+  # PostgreSQL build configuration
+  PGUSER = "dummy"
+  PGPASSWORD = "dummy"
+  PGDATABASE = "dummy"
+  PGHOST = "dummy"
   DATABASE_URL = "postgresql://dummy:dummy@dummy/dummy"
 
 [[plugins]]

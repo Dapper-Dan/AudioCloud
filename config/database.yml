@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: AudioCloud_production
-  username: AudioCloud
-  password: <%= ENV['AUDIOCLOUD_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
