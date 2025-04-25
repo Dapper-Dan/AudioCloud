@@ -9,8 +9,9 @@ class SongPart extends React.Component {
         currentTime: 0,
         songTime: "0:00",
         loading: true,
-        playing: false,
-        showSignUp: false
+        showSignUp: false,
+        wasLastInteracted: false,
+        isHovered: false
       }
       this.handleClick = this.handleClick.bind(this);
       this.play = this.play.bind(this);
@@ -21,12 +22,21 @@ class SongPart extends React.Component {
 
     play() {
       let audioEle = document.getElementById('myAudio')
-      if (!this.state.playing) {
-        audioEle.play()
-        this.setState({playing: true})
-      } else if (this.state.playing) {
-        audioEle.pause()
-        this.setState({playing: false})
+      this.setState({ wasLastInteracted: true })
+      if (window.lastInteractedTile && window.lastInteractedTile !== this) {
+        window.lastInteractedTile.setState({ wasLastInteracted: false })
+      }
+      window.lastInteractedTile = this
+
+      if (this.props.currentSong && this.props.currentSong.id === this.props.song.id) {
+        if (audioEle.paused) {
+          audioEle.play()
+        } else {
+          audioEle.pause()
+        }
+      } else {
+        this.props.getSong(this.props.song.id)
+        setTimeout(() => audioEle.play(), 300)
       }
     }
 
@@ -53,9 +63,7 @@ class SongPart extends React.Component {
     }
 
     handleClick() {
-      const song = this.props.song
-      this.props.getSong(song.id)
-      setTimeout(this.play, 300)    
+      this.play();
     }
   
     componentDidUpdate() {
@@ -95,14 +103,18 @@ class SongPart extends React.Component {
     }
 
     getPausedPlay() {
-      if (this.props.currentSong) {
-        if (this.props.currentSong.id !== this.props.song.id) {
-          return "play"
-        }
+      const audioEle = document.getElementById('myAudio');
+      const isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
+      
+      if (!isCurrentSong) {
+        return this.state.isHovered ? "play" : "";
       }
       
-      if (this.state.playing) return "pause"
-      if (!this.state.playing) return "play"
+      if (audioEle && !audioEle.paused) {
+        return (!this.state.wasLastInteracted && !this.state.isHovered) ? "" : "pause";
+      }
+      
+      return "play";
     }
 
     changeShow() {
@@ -177,7 +189,9 @@ class SongPart extends React.Component {
       if (!this.props.profile) {
         return (
           <>
-          <div className="songTile">
+          <div className="songTile" 
+               onMouseEnter={() => this.setState({ isHovered: true })}
+               onMouseLeave={() => this.setState({ isHovered: false })}>
             {song.pictureUrl ? (
                 <img src={song.pictureUrl} height="180px" width="180px"/>
                 ) : (
@@ -202,12 +216,13 @@ class SongPart extends React.Component {
             </div>
             : ""
           }
-          <div className="songProfileTile">
+          <div className="songProfileTile"
+               onMouseEnter={() => this.setState({ isHovered: true })}
+               onMouseLeave={() => this.setState({ isHovered: false })}>
             {song.pictureUrl ? (
                 <img className="songProfileTileImg" src={song.pictureUrl} height="180px" width="180px"/>
             ) : (
                 <img className="songProfileTileImg" src={window.songGradient} height="180px" width="180px" /> 
-              
             )}
             <div className="songProfileTileContainer">
               <div className="profile-song-info">
