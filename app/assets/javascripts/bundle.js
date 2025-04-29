@@ -4410,6 +4410,12 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
     value: function getPausedPlay() {
       var audioEle = document.getElementById('myAudio');
       var isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
+      if (this.props.profile) {
+        if (isCurrentSong && audioEle && !audioEle.paused) {
+          return "pause";
+        }
+        return "play";
+      }
       if (!isCurrentSong) {
         return this.state.isHovered ? "play" : "";
       }
@@ -4513,7 +4519,7 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
           role: "button",
           className: this.getPausedPlay(),
           onClick: this.handleClick
-        }, "Play"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
           className: "songTitle"
         }, song.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/".concat(song.display_name)
@@ -4559,7 +4565,7 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
           role: "button",
           className: this.getPausedPlay(),
           onClick: this.handleClick
-        }, "Play"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "profile-song-names-plate"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/".concat(song.display_name)
