@@ -106,6 +106,13 @@ class SongPart extends React.Component {
       const audioEle = document.getElementById('myAudio');
       const isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
       
+      if (this.props.profile) {
+        if (isCurrentSong && audioEle && !audioEle.paused) {
+          return "pause";
+        }
+        return "play";
+      }
+      
       if (!isCurrentSong) {
         return this.state.isHovered ? "play" : "";
       }
@@ -197,7 +204,7 @@ class SongPart extends React.Component {
                 ) : (
                 <img src={window.songGradient} height="180px" width="180px" /> 
             )}
-            <a role="button" className={this.getPausedPlay()} onClick={this.handleClick}>Play</a>
+            <a role="button" className={this.getPausedPlay()} onClick={this.handleClick}></a>
             <h3 className="songTitle">{song.title}</h3> 
             <Link to={`/${song.display_name}`}>
               <h3 className="songUser">{song.display_name}</h3>
@@ -227,7 +234,7 @@ class SongPart extends React.Component {
             <div className="songProfileTileContainer">
               <div className="profile-song-info">
                 <div className="playNameContainer">
-                  <a role="button" className={this.getPausedPlay()} onClick={this.handleClick}>Play</a>
+                  <a role="button" className={this.getPausedPlay()} onClick={this.handleClick}></a>
                   <div className="profile-song-names-plate" >
                     <Link to={`/${song.display_name}`}>
                       <h3 className="songUser">{song.display_name}</h3>
