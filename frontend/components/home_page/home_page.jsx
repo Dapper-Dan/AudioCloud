@@ -66,7 +66,7 @@ class HomePage extends React.Component {
 
     return (
       <>
-      <div className="mainLanding">
+      <div className="outtermost mainLanding">
         {sessionModal}
         <div className="frontHero">
           <div className="transLogo">
@@ -88,15 +88,15 @@ class HomePage extends React.Component {
             <button className="signup-modal-button" onClick={this.registerModelShow}>Create account</button>
           </div>
         </div>
-        <div className="mainSearch">
+        <div className="mainSearch flex-column flex-md-row">
           <SearchBarContainer/>
           <p>or</p>
           <button className="homePageUploadButton" onClick={this.registerModelShow}>UPLOAD YOUR OWN TRACK</button>
         </div>
         <SongIndexContainer/>
-        <div className="mainLanding" id="break">
+        <div className="outtermost" id="break">
+          <p>Happy to announce that we are now mobile and tablet friendly!</p>
           <img src={window.mobile}></img>
-          <p>Unfortunately, we're not mobile friendly. Plans to bring this feature soon!</p>
         </div>
         <div className="homePageThanks">
           <img id="micro" src={window.microphone}></img>

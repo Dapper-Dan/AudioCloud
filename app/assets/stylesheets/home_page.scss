@@ -23,9 +23,9 @@
     border: 1px solid #333;
     border-radius: 3px;
     border-color: #ccc;
-    background-color: transparent;
+    background-color: #fff;
     cursor: pointer;
-    color: white;
+    color: black;
     font-size: 14px;
     white-space: nowrap;
     font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
@@ -58,46 +58,50 @@
     background-color: white !important;
 }
 
-.mainLanding {
-    width: 45%;
-    margin: 0 auto;
-    display: block;
-    background-color: white;
-    font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;  
+.outtermost.mainLanding {
+    margin-top: 0;
 }
 
-.mainLanding#break p {
+.outtermost#break p {
     align-self: center;
-    margin-left: 64px;
     font-size: 19px;
+    padding: 40px 16px 0;
+    margin: 0;
+    text-align: center;
 }
 
-.mainLanding#break {
-    height: 300px;
+.outtermost#break {
+    height: 100%;
     background-color: #f3eded;
     width: 100%;
     display: flex;
+    align-items: center;
+    padding: 0;
+    margin-bottom: -94px;
 }
 
-.mainLanding#break img {
+.outtermost#break img {
     width: 410px;
-    margin-left: 60px;
-    align-self: baseline;
 }
 
 .homePageThanks {
     margin-bottom: 8px;
     display: flex;
+    z-index: 1000;
+    height: 235px;
+    position: relative;
 }
 
 .homePageThanks .signup-modal-button {
-    position: relative;
-    right: 36%;
-    top: 300px;
+    position: absolute;
+    top: 121px;
+    right: 11%;
 }
 
 #micro {
     width: 100%;
+    object-fit: cover;
+    object-position: 68%;
 }
 
 #links {
@@ -118,7 +122,7 @@
 }
 
 @media (max-width:2000px) {
-    .mainLanding {
+    .outtermost {
         width: 85%;
     }
 }
@@ -128,7 +132,7 @@
     position: relative;
     overflow: hidden;
     border-top: 4px solid rgb(65, 197, 81);
-    height: 453px;
+    height: 275px;
     -webkit-font-smoothing: antialiased;
     display: block;
 }
@@ -160,13 +164,13 @@
 .transLogo {
     position: absolute;
     top: 6px;
-    left: 20px;
+    left: 8px;
     z-index: 9;
 }
 
 .transWhite {
     height: 50px;
-    width: 200px;
+    width: 175px;
 }
 
 .modal-background {
@@ -182,16 +186,23 @@
 .songList {
     margin: auto;
     display: block;
+    width: 100%;
 }
 
 .songList ul {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     list-style-type: none;
     padding-inline-start: 0px;
-    justify-content: space-around;
-    margin: 0px 30px 0px 30px;
+    margin: 0px 16px 0px 16px;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow: scroll;
+
+    img {
+        width: 150px;
+        height: 150px;
+    }
 }
 
 .songTile {
@@ -277,11 +288,13 @@ audio {
     display: flex;
     flex-direction: row;
     margin: auto;
-    width: 60%;
+    width: 100%;
+    gap: 6px;
 }
 
 .mainSearch .searchBar {
     height: 45px;
+    margin: 0 16px;
     width: 100%;
     z-index: 1;
     position: relative;
@@ -295,9 +308,10 @@ audio {
 }
 
 .mainSearch .search-button {
-    position: relative;
-    top: 0px;
-    left: -30px;
+    position: absolute;
+    width: fit-content;
+    right: 19px;
+    top: 39px;
 }
 
 .mainSearch .options-drop {
@@ -335,15 +349,26 @@ audio {
     align-self: center;
     margin: auto;
     position: absolute;
-    bottom: 93px;
+    bottom: 43px;
     display: flex;
     align-items: center;
-    margin-right: 175px;
     padding: 1px 10px 0px 10px;
 }
 
 .carousel-item#gitHub {
     justify-content: center;
+
+    .landing-slide {
+        object-position: 34%;
+    }
+}
+
+.mainLanding .carousel-item {
+    height: 100%;
+
+    img {
+        object-fit: cover;
+    }
 }
 
 .signup-modal-button#gitHubLink:hover {
