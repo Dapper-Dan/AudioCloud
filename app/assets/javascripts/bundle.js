@@ -4281,13 +4281,18 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
       loading: true,
       showSignUp: false,
       wasLastInteracted: false,
-      isHovered: false
+      isHovered: false,
+      isMediumDevice: window.innerWidth <= 768,
+      isTouched: false
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.play = _this.play.bind(_assertThisInitialized(_this));
     _this.likeSong = _this.likeSong.bind(_assertThisInitialized(_this));
     _this.changeShow = _this.changeShow.bind(_assertThisInitialized(_this));
     _this.waveformClick = _this.waveformClick.bind(_assertThisInitialized(_this));
+    _this.handleResize = _this.handleResize.bind(_assertThisInitialized(_this));
+    _this.handleTouchStart = _this.handleTouchStart.bind(_assertThisInitialized(_this));
+    _this.handleTouchEnd = _this.handleTouchEnd.bind(_assertThisInitialized(_this));
     return _this;
   }
   _createClass(SongPart, [{
@@ -4353,6 +4358,19 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
       this.setState({
         loading: false
       });
+      window.addEventListener('resize', this.handleResize);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      window.removeEventListener('resize', this.handleResize);
+    }
+  }, {
+    key: "handleResize",
+    value: function handleResize() {
+      this.setState({
+        isMediumDevice: window.innerWidth <= 768
+      });
     }
   }, {
     key: "handleClick",
@@ -4406,23 +4424,40 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
       if (days >= 1) return "".concat(days, " days ago");
     }
   }, {
+    key: "handleTouchStart",
+    value: function handleTouchStart(e) {
+      if (e.type === 'touchstart') {
+        e.preventDefault();
+      }
+      this.setState({
+        isTouched: true
+      });
+    }
+  }, {
+    key: "handleTouchEnd",
+    value: function handleTouchEnd(e) {
+      if (e.type === 'touchend') {
+        e.preventDefault();
+      }
+    }
+  }, {
     key: "getPausedPlay",
     value: function getPausedPlay() {
       var audioEle = document.getElementById('myAudio');
       var isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
-      if (this.props.profile) {
+      if (this.state.isTouched || !this.state.isMediumDevice && this.state.isHovered) {
         if (isCurrentSong && audioEle && !audioEle.paused) {
           return "pause";
         }
         return "play";
       }
       if (!isCurrentSong) {
-        return this.state.isHovered ? "play" : "";
+        return "";
       }
       if (audioEle && !audioEle.paused) {
-        return !this.state.wasLastInteracted && !this.state.isHovered ? "" : "pause";
+        return this.state.wasLastInteracted ? "pause" : "";
       }
-      return "play";
+      return "";
     }
   }, {
     key: "changeShow",
@@ -4503,10 +4538,18 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
             });
           },
           onMouseLeave: function onMouseLeave() {
-            return _this3.setState({
+            _this3.setState({
               isHovered: false
             });
-          }
+            if (!('ontouchstart' in window)) {
+              _this3.setState({
+                isTouched: false
+              });
+            }
+          },
+          onTouchStart: this.handleTouchStart,
+          onTouchEnd: this.handleTouchEnd,
+          onClick: this.handleTouchStart
         }, song.pictureUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: song.pictureUrl,
           height: "180px",
@@ -4541,10 +4584,18 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
             });
           },
           onMouseLeave: function onMouseLeave() {
-            return _this3.setState({
+            _this3.setState({
               isHovered: false
             });
-          }
+            if (!('ontouchstart' in window)) {
+              _this3.setState({
+                isTouched: false
+              });
+            }
+          },
+          onTouchStart: this.handleTouchStart,
+          onTouchEnd: this.handleTouchEnd,
+          onClick: this.handleTouchStart
         }, song.pictureUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "songProfileTileImg",
           src: song.pictureUrl,

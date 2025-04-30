@@ -11,13 +11,18 @@ class SongPart extends React.Component {
         loading: true,
         showSignUp: false,
         wasLastInteracted: false,
-        isHovered: false
+        isHovered: false,
+        isMediumDevice: window.innerWidth <= 768,
+        isTouched: false
       }
       this.handleClick = this.handleClick.bind(this);
       this.play = this.play.bind(this);
       this.likeSong = this.likeSong.bind(this);
       this.changeShow = this.changeShow.bind(this);
       this.waveformClick = this.waveformClick.bind(this);
+      this.handleResize = this.handleResize.bind(this);
+      this.handleTouchStart = this.handleTouchStart.bind(this);
+      this.handleTouchEnd = this.handleTouchEnd.bind(this);
     }
 
     play() {
@@ -59,7 +64,16 @@ class SongPart extends React.Component {
     }
 
     componentDidMount() {
-      this.setState({loading: false})
+      this.setState({loading: false});
+      window.addEventListener('resize', this.handleResize);
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.handleResize);
+    }
+
+    handleResize() {
+      this.setState({ isMediumDevice: window.innerWidth <= 768 });
     }
 
     handleClick() {
@@ -102,11 +116,24 @@ class SongPart extends React.Component {
       if (days >= 1) return `${days} days ago`
     }
 
+    handleTouchStart(e) {
+      if (e.type === 'touchstart') {
+        e.preventDefault();
+      }
+      this.setState({ isTouched: true });
+    }
+
+    handleTouchEnd(e) {
+      if (e.type === 'touchend') {
+        e.preventDefault();
+      }
+    }
+
     getPausedPlay() {
       const audioEle = document.getElementById('myAudio');
       const isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
       
-      if (this.props.profile) {
+      if (this.state.isTouched || (!this.state.isMediumDevice && this.state.isHovered)) {
         if (isCurrentSong && audioEle && !audioEle.paused) {
           return "pause";
         }
@@ -114,14 +141,14 @@ class SongPart extends React.Component {
       }
       
       if (!isCurrentSong) {
-        return this.state.isHovered ? "play" : "";
+        return "";
       }
       
       if (audioEle && !audioEle.paused) {
-        return (!this.state.wasLastInteracted && !this.state.isHovered) ? "" : "pause";
+        return this.state.wasLastInteracted ? "pause" : "";
       }
       
-      return "play";
+      return "";
     }
 
     changeShow() {
@@ -198,7 +225,15 @@ class SongPart extends React.Component {
           <>
           <div className="songTile" 
                onMouseEnter={() => this.setState({ isHovered: true })}
-               onMouseLeave={() => this.setState({ isHovered: false })}>
+               onMouseLeave={() => {
+                 this.setState({ isHovered: false });
+                 if (!('ontouchstart' in window)) {
+                   this.setState({ isTouched: false });
+                 }
+               }}
+               onTouchStart={this.handleTouchStart}
+               onTouchEnd={this.handleTouchEnd}
+               onClick={this.handleTouchStart}>
             {song.pictureUrl ? (
                 <img src={song.pictureUrl} height="180px" width="180px"/>
                 ) : (
@@ -225,7 +260,15 @@ class SongPart extends React.Component {
           }
           <div className="songProfileTile"
                onMouseEnter={() => this.setState({ isHovered: true })}
-               onMouseLeave={() => this.setState({ isHovered: false })}>
+               onMouseLeave={() => {
+                 this.setState({ isHovered: false });
+                 if (!('ontouchstart' in window)) {
+                   this.setState({ isTouched: false });
+                 }
+               }}
+               onTouchStart={this.handleTouchStart}
+               onTouchEnd={this.handleTouchEnd}
+               onClick={this.handleTouchStart}>
             {song.pictureUrl ? (
                 <img className="songProfileTileImg" src={song.pictureUrl} height="180px" width="180px"/>
             ) : (

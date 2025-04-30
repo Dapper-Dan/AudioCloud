@@ -254,6 +254,10 @@
     background-size: 70% 80%;
     background-position: 40%;
     background-repeat: no-repeat;
+
+    @media (max-width: 768px) {
+        display: block;
+    }
 }
 
 .songTile .pause {
@@ -272,10 +276,16 @@
     background-position-y: center;
     background-repeat: no-repeat;
     background-image: url('media_player_assets/songTilePause.png');
+
+    @media (max-width: 768px) {
+        display: block;
+    }
 }
 
-.songTile:hover .play {
-    display: block;
+@media (min-width: 769px) {
+    .songTile:hover .play {
+        display: block;
+    }
 }
 
 audio {
