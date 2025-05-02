@@ -77,31 +77,68 @@
     display: flex;
     align-items: center;
     padding: 0;
-    margin-bottom: -94px;
+    margin-bottom: -58px;
+
+    @media (min-width: 768px) {
+        min-height: auto;
+        margin-bottom: -92px;
+    }
 }
 
 .outtermost#break img {
-    width: 410px;
+    width: 250px;
+
+    @media (min-width: 768px) {
+        width: 410px;
+    }
 }
 
 .homePageThanks {
     margin-bottom: 8px;
     display: flex;
     z-index: 1000;
-    height: 235px;
+    height: 285px;
     position: relative;
+
+    @media (min-width: 768px) {
+        height: 325px;
+    }
+
+    p {
+        position: absolute;
+        color: #fff;
+        text-align: center;
+        right: 38px;
+        top: 73px;
+        font-size: 16px;
+
+        @media (min-width: 768px) {
+            font-size: 32px;
+            right: 70px;
+            top: 50px;
+        }
+    }
 }
 
 .homePageThanks .signup-modal-button {
     position: absolute;
-    top: 121px;
-    right: 11%;
+    top: 126px;
+    right: 50px;
+
+    @media (min-width: 768px) {
+        right: 162px;
+        top: 152px;
+    }
 }
 
 #micro {
     width: 100%;
     object-fit: cover;
-    object-position: 68%;
+    object-position: center 20%;
+
+    @media (min-width: 768px) {
+        object-position: 96% 20%;
+    }
 }
 
 #links {
@@ -135,6 +172,10 @@
     height: 275px;
     -webkit-font-smoothing: antialiased;
     display: block;
+
+    @media (min-width: 768px) {
+        height: 350px;
+    }
 }
 
 .caro-container {
@@ -187,6 +228,11 @@
     margin: auto;
     display: block;
     width: 100%;
+
+    @media (min-width: 768px) {
+        display: flex;
+    justify-content: center;
+    }
 }
 
 .songList ul {
@@ -202,6 +248,11 @@
     img {
         width: 150px;
         height: 150px;
+
+        @media (min-width: 768px) {
+            width: 180px;
+            height: 180px;
+        }
     }
 }
 
@@ -293,18 +344,22 @@ audio {
 }
 
 .mainSearch {
-    padding: 30px 0px 30px 0px;
+    padding: 30px 16px;
     position: relative;
     display: flex;
     flex-direction: row;
     margin: auto;
     width: 100%;
     gap: 6px;
+
+    @media (min-width: 768px) {
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .mainSearch .searchBar {
     height: 45px;
-    margin: 0 16px;
     width: 100%;
     z-index: 1;
     position: relative;
@@ -320,8 +375,7 @@ audio {
 .mainSearch .search-button {
     position: absolute;
     width: fit-content;
-    right: 19px;
-    top: 39px;
+    right: 8px;
 }
 
 .mainSearch .options-drop {
@@ -352,14 +406,13 @@ audio {
     border-radius: 3px;
     border: none;
     padding: 5px;
-    margin-left: 23px;
 }
 
 .signup-modal-button#gitHubLink {
     align-self: center;
     margin: auto;
     position: absolute;
-    bottom: 43px;
+    bottom: 36px;
     display: flex;
     align-items: center;
     padding: 1px 10px 0px 10px;
@@ -367,9 +420,27 @@ audio {
 
 .carousel-item#gitHub {
     justify-content: center;
+    p {
+        color: #fff;
+        position: absolute;
+        top: 117px;
+        text-align: center;
+        width: 399px;
+        font-size: 19px;
 
-    .landing-slide {
-        object-position: 34%;
+        @media (min-width: 768px) {
+            font-size: 24px;
+            top: 163px;
+            width: 425px;
+        }
+
+        &:first-of-type {
+            top: 60px;
+
+            @media (min-width: 768px) {
+                top: 83px;
+            }
+        }
     }
 }
 

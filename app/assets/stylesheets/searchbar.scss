@@ -90,6 +90,11 @@ ul.options li.option-active {
 }
 
 .mainSearch .searchBarContainer {
+    position: relative;
     width: 100%;
     display: flex;
+
+    @media (min-width: 768px) {
+        width: 64%;
+    }
 }

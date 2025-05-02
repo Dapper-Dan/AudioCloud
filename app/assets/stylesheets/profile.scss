@@ -2,11 +2,11 @@
     width: 100%;
     margin: 0 auto;
     margin-top: 101px;
-    padding-bottom: 50px;
+    padding-bottom: 85px;
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: #ffffff;
     z-index: 9;
     font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif;
 
@@ -16,6 +16,7 @@
         overflow: hidden;
         min-height: 100vh;
         margin-top: 45px;
+        padding-bottom: 50px;
     }
 
     &.song-upload-container {

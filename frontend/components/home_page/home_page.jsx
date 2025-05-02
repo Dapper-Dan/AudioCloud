@@ -78,7 +78,15 @@ class HomePage extends React.Component {
                 <img className="landing-slide" src={window.landing1} alt="First slide"/>
               </Carousel.Item>
               <Carousel.Item id="gitHub">
-                <img className="landing-slide" src={window.landing2} alt="Third slide"/>
+                <img className="landing-slide" src={window.landing2} alt="Second slide"/>
+                <p>
+                  Inspired by SoundCloud
+                  <br />
+                  Created by me, Daniel Lancaster
+                </p>
+                <p>
+                  If you enjoy this app, you can find my other work on my GitHub. Happy Listening.
+                </p>
                 <a className="signup-modal-button" id="gitHubLink" href={"https://github.com/Dapper-Dan/AudioCloud"}>GitHub</a>
               </Carousel.Item>
             </Carousel>
@@ -100,6 +108,11 @@ class HomePage extends React.Component {
         </div>
         <div className="homePageThanks">
           <img id="micro" src={window.microphone}></img>
+          <p>
+            Thanks for listening.
+            <br />
+            Now join in!
+          </p>
           <button className="signup-modal-button" onClick={this.registerModelShow}>Create account</button>
         </div>
         <div className="homePageFooter">

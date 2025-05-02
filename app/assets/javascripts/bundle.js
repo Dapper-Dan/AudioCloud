@@ -851,8 +851,8 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "landing-slide",
         src: window.landing2,
-        alt: "Third slide"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        alt: "Second slide"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Inspired by SoundCloud", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Created by me, Daniel Lancaster"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "If you enjoy this app, you can find my other work on my GitHub. Happy Listening."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "signup-modal-button",
         id: "gitHubLink",
         href: "https://github.com/Dapper-Dan/AudioCloud"
@@ -879,7 +879,7 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         id: "micro",
         src: window.microphone
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Thanks for listening.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Now join in!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "signup-modal-button",
         onClick: this.registerModelShow
       }, "Create account")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2910,7 +2910,7 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
           className: "searchBarContainer"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           className: "searchBar",
-          placeholder: "  Search for music or podcasts",
+          placeholder: "Search for music or podcasts",
           type: "text",
           value: this.state.searchInput,
           onChange: this.searchUpdate,

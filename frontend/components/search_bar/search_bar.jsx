@@ -180,7 +180,7 @@ export default class SearchBar extends React.Component {
             return (  
                 <>
                 <div className="searchBarContainer">
-                    <input className="searchBar" placeholder="  Search for music or podcasts" type="text" value={this.state.searchInput} onChange={this.searchUpdate} onKeyDown={this.onKeyDown} onMouseOver={this.onMouseOver}/>
+                    <input className="searchBar" placeholder="Search for music or podcasts" type="text" value={this.state.searchInput} onChange={this.searchUpdate} onKeyDown={this.onKeyDown} onMouseOver={this.onMouseOver}/>
                     <button className="search-button" onClick={this.onClick}> <img src={window.searchButton} width="15px" /> </button> 
                     {optionList}
                 </div>
