@@ -100,8 +100,14 @@
 }
 
 .discoverNewUsersBox {
-    padding-right: 41px;
     text-align-last: center;
+
+    img {
+        width: 180px;
+        border-radius: 60%;
+        height: 180px;
+        object-fit: cover;
+    }
 }
 
 .sideBar #profilePic {

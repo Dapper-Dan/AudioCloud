@@ -181,6 +181,7 @@
 .songProfileTileImg {
     min-width: 180px;
     display: none;
+    object-fit: cover;
 
     @media (min-width: 768px) {
         display: block;

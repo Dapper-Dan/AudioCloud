@@ -153,8 +153,8 @@ export default class Discover extends React.Component {
                             {recentUsers.map((user, index) => (
                                 <div key={index}>
                                     <div className="discoverNewUsersBox">
-                                        <img id="profilePic" src={user.profilePicUrl} /> 
                                         <Link to={`/${user.display_name}`}>
+                                            <img id="profilePic" src={user.profilePicUrl} /> 
                                             <h1 className="discoverUserPart">{user.display_name}</h1>
                                         </Link>
                                     </div>
