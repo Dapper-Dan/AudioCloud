@@ -52,6 +52,10 @@
     margin: auto;
     left: 0;
     right: 0;
+
+    @media (min-width: 768px) {
+        width: fit-content;
+    }
 }
 
 #signup-password,#signup-age, #signup-gender, #signup-displayName {

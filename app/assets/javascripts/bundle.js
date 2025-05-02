@@ -3381,8 +3381,8 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
     key: "loginDemoUser",
     value: function loginDemoUser() {
       this.props.login({
-        email: "dan@aol.com",
-        password: "123456"
+        email: "d@aol.com",
+        password: "Dude1990!"
       });
     }
   }, {
