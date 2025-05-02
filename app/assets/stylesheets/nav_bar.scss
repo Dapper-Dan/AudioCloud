@@ -388,6 +388,10 @@
     margin: 20px auto 0;
     flex-direction: column;
 
+    img {
+        object-fit: cover;
+    }
+
     @media (min-width: 768px) {
         margin-left: 23px;
         margin-top: 20px;
