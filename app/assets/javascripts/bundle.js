@@ -1188,6 +1188,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _this.prevQueue = _this.prevQueue.bind(_assertThisInitialized(_this));
     _this.repeatQueue = _this.repeatQueue.bind(_assertThisInitialized(_this));
     _this.shuffleQueue = _this.shuffleQueue.bind(_assertThisInitialized(_this));
+    _this.handleBarClick = _this.handleBarClick.bind(_assertThisInitialized(_this));
     return _this;
   }
   _createClass(MusicPlayer, [{
@@ -1361,6 +1362,19 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "handleBarClick",
+    value: function handleBarClick(e) {
+      var progressLine = document.querySelector('.song-bar');
+      if (!progressLine) return;
+      var rect = progressLine.getBoundingClientRect();
+      var clickX = e.clientX - rect.left;
+      var audioEle = document.getElementById('myAudio');
+      if (audioEle && audioEle.duration) {
+        var newTime = clickX / rect.width * audioEle.duration;
+        audioEle.currentTime = newTime;
+      }
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       var _this2 = this;
@@ -1530,7 +1544,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           id: likeButtonStyle,
           width: "25px"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "song-progress-bar-container"
+          className: "song-progress-bar-container",
+          onClick: this.handleBarClick,
+          onMouseDown: this.handleMouseDown
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "button-container d-none d-md-flex"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1570,8 +1586,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
             width: "".concat(this.state.currentTime, "%")
           }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "bar-dot",
-          onMouseDown: this.handleMouseDown
+          className: "bar-dot"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "end-time"
         }, endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {

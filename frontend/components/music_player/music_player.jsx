@@ -33,7 +33,7 @@ class MusicPlayer extends React.Component {
         this.prevQueue = this.prevQueue.bind(this);
         this.repeatQueue = this.repeatQueue.bind(this);
         this.shuffleQueue = this.shuffleQueue.bind(this);
-        
+        this.handleBarClick = this.handleBarClick.bind(this);
     }
 
     play() {
@@ -148,6 +148,18 @@ class MusicPlayer extends React.Component {
 
     shuffleQueue() {
         this.setState({shuffle: !this.state.shuffle})
+    }
+
+    handleBarClick(e) {
+        const progressLine = document.querySelector('.song-bar');
+        if (!progressLine) return;
+        const rect = progressLine.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const audioEle = document.getElementById('myAudio');
+        if (audioEle && audioEle.duration) {
+            const newTime = (clickX / rect.width) * audioEle.duration;
+            audioEle.currentTime = newTime;
+        }
     }
 
     componentDidUpdate() {
@@ -277,7 +289,7 @@ class MusicPlayer extends React.Component {
                             <img src={window.heart} onClick={this.likeSong} className="heartMedia" id={likeButtonStyle} width="25px" />
                         </div>
                     </div>
-                    <div className="song-progress-bar-container"> 
+                    <div className="song-progress-bar-container" onClick={this.handleBarClick} onMouseDown={this.handleMouseDown}> 
                         <div className="button-container d-none d-md-flex">
                             <img onClick={this.prevQueue} src={window.back} width="21px"/>
                             <button className="play-button" data-playing="false" role="switch" aria-checked="false" onClick={this.play}>
@@ -290,10 +302,10 @@ class MusicPlayer extends React.Component {
                         <div className="current-time">
                             {this.state.songTime}
                         </div>
-                        <div className="song-bar" >
+                        <div className="song-bar">
                             <div className="song-progress-bar" style={{width:`${this.state.currentTime}%`}}>
                             </div>
-                            <div className="bar-dot" onMouseDown={this.handleMouseDown}>
+                            <div className="bar-dot">
                             </div>
                         </div> 
                         <div className="end-time">
