@@ -61,7 +61,7 @@
 
 .nav-logo {
     height: 46px;
-    width: fit-content ;
+    width: auto;
 }
 
 .home-button {
@@ -234,6 +234,10 @@
     color: white;
     margin-left: 15px;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 25vw;
+    display: block;
 }
 
 #downArrow {
