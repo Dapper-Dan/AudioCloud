@@ -31,7 +31,7 @@
     height: 260px;
     position: relative;
     justify-content: space-between;
-    margin-bottom: 136px;
+    margin-bottom: 180px;
 }
 
 .current-user-cover {
@@ -254,10 +254,14 @@
 
 .songProgressTimerContainer {
     position: absolute;
-    top: 95px;
+    top: 88px;
     width: 100%;
     justify-content: space-between;
     display: flex;
+
+    @media (min-width: 768px) {
+        top: 95px;
+    }
 }
 
 .songEndTimer {
