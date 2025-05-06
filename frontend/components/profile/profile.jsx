@@ -395,7 +395,7 @@ class Profile extends React.Component {
             { this.props.sessionUser ? <UserNavBarContainer /> : <NavBarContainer /> }
           </div>
           <div className="outtermost" > 
-            <div className="cover" >
+            <div className={`cover ${currentUserProfile ? "current-user-cover" : ""}`} >
               <img src={coverPic} className="cover-photo" width="1200px" />
               <div className="profile-box" >
                 {user.profilePicUrl ? (
