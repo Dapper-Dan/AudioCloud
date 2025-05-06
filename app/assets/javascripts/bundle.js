@@ -1893,10 +1893,6 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
       switch (this.props.navType) {
         case 'default':
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "nav_bar_background"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "nav-con"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "nav_bar"
           }, sessionModal, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "nav_buttons_container"
@@ -1933,7 +1929,7 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
           }, " Sign in "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             className: "signup-modal-button",
             onClick: this.registerModelShow
-          }, " Create account")))))), this.state.isMobile && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_bar_search_bar_container_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+          }, " Create account")))), this.state.isMobile && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_bar_search_bar_container_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null));
         case 'song':
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "song_nav_bar"

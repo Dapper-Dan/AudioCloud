@@ -152,28 +152,24 @@ export default class NavBar extends React.Component {
             case 'default':
             return (
                 <>
-                    <div className="nav_bar_background">
-                        <div className="nav-con">
-                            <div className="nav_bar">
-                                {sessionModal}
-                                <div className="nav_buttons_container" >
-                                    <nav className="left_nav">
-                                        <img src={window.greenLogo} width="184px" className="nav-logo d-none d-md-block"/>
-                                        <NavLink to="/discover" className="home-button d-md-none" style={{ textDecoration: 'none' }}>   
-                                            <img src={window.greenLogoMobile} className='nav-logo' width="184px"/>
-                                        </NavLink>
-                                        <NavLink to="/discover" className="home-button d-none d-md-block" style={{ textDecoration: 'none' }}>   
-                                            Home
-                                        </NavLink>
-                                        <a className="library-button" onClick={ this.registerModelShow}>Library</a>
-                                    </nav>
-                                    {!this.state.isMobile && <SearchBarContainer/>}
-                                    <nav className="right_nav">
-                                        <button className="login-modal-button" onClick={ this.loginModelShow }> Sign in </button>
-                                        <button className="signup-modal-button" onClick={ this.registerModelShow }> Create account</button>
-                                    </nav>
-                                </div>
-                            </div>
+                    <div className="nav_bar">
+                        {sessionModal}
+                        <div className="nav_buttons_container" >
+                            <nav className="left_nav">
+                                <img src={window.greenLogo} width="184px" className="nav-logo d-none d-md-block"/>
+                                <NavLink to="/discover" className="home-button d-md-none" style={{ textDecoration: 'none' }}>   
+                                    <img src={window.greenLogoMobile} className='nav-logo' width="184px"/>
+                                </NavLink>
+                                <NavLink to="/discover" className="home-button d-none d-md-block" style={{ textDecoration: 'none' }}>   
+                                    Home
+                                </NavLink>
+                                <a className="library-button" onClick={ this.registerModelShow}>Library</a>
+                            </nav>
+                            {!this.state.isMobile && <SearchBarContainer/>}
+                            <nav className="right_nav">
+                                <button className="login-modal-button" onClick={ this.loginModelShow }> Sign in </button>
+                                <button className="signup-modal-button" onClick={ this.registerModelShow }> Create account</button>
+                            </nav>
                         </div>
                     </div>
                     {this.state.isMobile && <SearchBarContainer/>}
