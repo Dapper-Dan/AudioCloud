@@ -251,7 +251,7 @@ class SongPart extends React.Component {
                 ) : (
                 <img src={window.songGradient} height="180px" width="180px" /> 
             )}
-            <a role="button" className={this.getPausedPlay()} onClick={this.handleClick}></a>
+            <a role="button" className={this.getPausedPlay()} onClick={this.handleClick} onTouchStart={this.handleClick}></a>
             <h3 className="songTitle">{song.title}</h3> 
             <Link to={`/${song.display_name}`}>
               <h3 className="songUser">{song.display_name}</h3>
@@ -289,7 +289,7 @@ class SongPart extends React.Component {
             <div className="songProfileTileContainer">
               <div className="profile-song-info">
                 <div className="playNameContainer">
-                  <a role="button" className={this.getPausedPlay()} onClick={this.handleClick}></a>
+                  <a role="button" className={this.getPausedPlay()} onClick={this.handleClick} onTouchStart={this.handleClick}></a>
                   <div className="profile-song-names-plate" >
                     <Link to={`/${song.display_name}`}>
                       <h3 className="songUser">{song.display_name}</h3>
@@ -318,7 +318,7 @@ class SongPart extends React.Component {
                   {endTime}
                 </div>
               </div>
-              <a role="button" className="likeButton" id={likeButtonStyle} onClick={this.likeSong}><img src={window.heart} width="15px"></img>{totalLikes}</a>
+              <a role="button" className="likeButton" id={likeButtonStyle} onClick={this.likeSong} onTouchStart={this.likeSong}><img src={window.heart} width="15px"></img>{totalLikes}</a>
             </div>
           </div>
           </>

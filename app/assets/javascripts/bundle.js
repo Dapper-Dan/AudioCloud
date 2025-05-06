@@ -4584,7 +4584,8 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           role: "button",
           className: this.getPausedPlay(),
-          onClick: this.handleClick
+          onClick: this.handleClick,
+          onTouchStart: this.handleClick
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
           className: "songTitle"
         }, song.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -4638,7 +4639,8 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           role: "button",
           className: this.getPausedPlay(),
-          onClick: this.handleClick
+          onClick: this.handleClick,
+          onTouchStart: this.handleClick
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "profile-song-names-plate"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -4672,7 +4674,8 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
           role: "button",
           className: "likeButton",
           id: likeButtonStyle,
-          onClick: this.likeSong
+          onClick: this.likeSong,
+          onTouchStart: this.likeSong
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: window.heart,
           width: "15px"
