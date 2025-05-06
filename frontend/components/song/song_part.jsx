@@ -120,6 +120,11 @@ class SongPart extends React.Component {
       if (e.type === 'touchstart') {
         e.preventDefault();
       }
+
+      if (window.lastTouchedTile && window.lastTouchedTile !== this) {
+        window.lastTouchedTile.setState({ isTouched: false });
+      }
+      window.lastTouchedTile = this;
       this.setState({ isTouched: true });
     }
 
@@ -132,7 +137,14 @@ class SongPart extends React.Component {
     getPausedPlay() {
       const audioEle = document.getElementById('myAudio');
       const isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
-      
+
+      if (this.props.profile) {
+        if (isCurrentSong && audioEle && !audioEle.paused) {
+          return "pause";
+        }
+        return "play";
+      }
+
       if (this.state.isTouched || (!this.state.isMediumDevice && this.state.isHovered)) {
         if (isCurrentSong && audioEle && !audioEle.paused) {
           return "pause";

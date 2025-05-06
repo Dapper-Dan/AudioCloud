@@ -4440,6 +4440,12 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
       if (e.type === 'touchstart') {
         e.preventDefault();
       }
+      if (window.lastTouchedTile && window.lastTouchedTile !== this) {
+        window.lastTouchedTile.setState({
+          isTouched: false
+        });
+      }
+      window.lastTouchedTile = this;
       this.setState({
         isTouched: true
       });
@@ -4456,6 +4462,12 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
     value: function getPausedPlay() {
       var audioEle = document.getElementById('myAudio');
       var isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
+      if (this.props.profile) {
+        if (isCurrentSong && audioEle && !audioEle.paused) {
+          return "pause";
+        }
+        return "play";
+      }
       if (this.state.isTouched || !this.state.isMediumDevice && this.state.isHovered) {
         if (isCurrentSong && audioEle && !audioEle.paused) {
           return "pause";
