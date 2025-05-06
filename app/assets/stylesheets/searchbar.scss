@@ -64,6 +64,7 @@ ul.options li.option-active {
     right: 19px;
     z-index: 901;
     outline: none !important;
+    background-color: transparent;
 
     @media (min-width: 768px) {
         right: 1px;
