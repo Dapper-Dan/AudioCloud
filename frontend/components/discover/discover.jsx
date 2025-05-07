@@ -4,6 +4,7 @@ import NavBarContainer from '../nav_bar/nav_bar_container';
 import {Link} from 'react-router-dom';
 import SongPartContainer from '../song/song_part_container';
 import Slider from 'react-slick';
+import LoadingModal from '../loading_modal.jsx';
 
 
 export default class Discover extends React.Component {
@@ -58,7 +59,7 @@ export default class Discover extends React.Component {
         let trendingHipHop
         let recentUsers
         if (!this.props.songs) {
-            return (<p>loading...</p>)
+            return (<LoadingModal />)
         } else {
            trendingSongs = this.quickSort(Object.values(this.props.songs))  
            trendingEDM = this.getTrendingGenre(this.props.songs, "Dance & EDM")
@@ -67,7 +68,7 @@ export default class Discover extends React.Component {
         }
 
         if (!this.props.users) {
-            return (<div>loading....</div>)
+            return (<LoadingModal />)
         } else {
             recentUsers = this.getRecentUsers(this.props.users)
         }

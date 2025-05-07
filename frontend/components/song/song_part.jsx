@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import SignupFormContainer from '../session/signup_form_container.jsx';
+import LoadingModal from '../loading_modal.jsx';
 
 class SongPart extends React.Component {
     constructor(props) {
@@ -171,7 +172,7 @@ class SongPart extends React.Component {
 
     render() {
       if (!this.props.song || this.state.loading) {
-        return (<p>loading...</p>)
+        return (<LoadingModal />)
       }
 
       if (this.state.showSignUp) {

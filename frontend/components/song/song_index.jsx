@@ -1,5 +1,6 @@
 import React from 'react';
 import SongPartContainer from './song_part_container'
+import LoadingModal from '../loading_modal.jsx';
 
 class SongList extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class SongList extends React.Component {
 
     render(){
       if (this.state.loading) {
-        return (<p>loading...</p>)
+        return (<LoadingModal />)
       } else {
         let songs = Object.values(this.props.songs).slice(0,12)
 

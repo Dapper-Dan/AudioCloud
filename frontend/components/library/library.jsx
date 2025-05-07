@@ -2,6 +2,7 @@ import React from 'react';
 import UserNavBarContainer from '../nav_bar/user_nav_bar_container';
 import {NavLink, Link} from 'react-router-dom';
 import SongPartContainer from '../song/song_part_container';
+import LoadingModal from '../loading_modal.jsx';
 
 export default class Library extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ export default class Library extends React.Component {
         if (this.props.state.entities.songs.songs) {
             songs = Object.values(this.props.state.entities.songs.songs)
         } else {
-            return (<p>loading...</p>)
+            return (<LoadingModal />)
         }
 
         if (songs && songs.length < 12) {

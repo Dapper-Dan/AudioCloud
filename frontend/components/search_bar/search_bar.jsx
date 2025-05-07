@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import LoadingModal from '../loading_modal.jsx';
 
 export default class SearchBar extends React.Component {
     constructor(props) {
@@ -147,7 +148,7 @@ export default class SearchBar extends React.Component {
         }
         
         if (this.state.loading) {
-            return (<p>loading...</p>)
+            return (<LoadingModal />)
         } else {
             let optionList;
             if (this.state.showOptions && this.state.searchInput ) {

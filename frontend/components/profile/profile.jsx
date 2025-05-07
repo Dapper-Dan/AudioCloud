@@ -3,6 +3,7 @@ import SongPartContainer from '../song/song_part_container';
 import NavBarContainer from '../nav_bar/nav_bar_container';
 import SongNavBarContainer from '../nav_bar/song_nav_bar_container';
 import UserNavBarContainer from '../nav_bar/user_nav_bar_container';
+import LoadingModal from '../loading_modal.jsx';
 
 class Profile extends React.Component {
     constructor(props) {
@@ -168,7 +169,7 @@ class Profile extends React.Component {
         document.body.style.overflow = 'unset';
       }
 
-      if(this.state.loading) return (<div>loading....</div>);
+      if(this.state.loading) return (<LoadingModal />);
         let songs
         if (this.props.state.entities.songs.songs) {
           songs = Object.values(this.props.state.entities.songs.songs).sort((a, b) => {
