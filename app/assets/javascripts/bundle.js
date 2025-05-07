@@ -1140,6 +1140,7 @@ var mDTP = function mDTP(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1151,6 +1152,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   _inherits(MusicPlayer, _React$Component);
@@ -1192,6 +1194,96 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     return _this;
   }
   _createClass(MusicPlayer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+      var audioEle = document.getElementById('myAudio');
+      if (audioEle) {
+        audioEle.onplay = function () {
+          return _this2.props.dispatch({
+            type: 'SET_IS_PLAYING',
+            isPlaying: true
+          });
+        };
+        audioEle.onpause = function () {
+          return _this2.props.dispatch({
+            type: 'SET_IS_PLAYING',
+            isPlaying: false
+          });
+        };
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var _this3 = this;
+      var audioEle = document.getElementById('myAudio');
+      if (audioEle) {
+        audioEle.onplay = function () {
+          return _this3.props.dispatch({
+            type: 'SET_IS_PLAYING',
+            isPlaying: true
+          });
+        };
+        audioEle.onpause = function () {
+          return _this3.props.dispatch({
+            type: 'SET_IS_PLAYING',
+            isPlaying: false
+          });
+        };
+      }
+      var songDisplayName;
+      if (this.props.currentSong) {
+        songDisplayName = this.props.currentSong.display_name;
+        if (songDisplayName && this.state.currentSongDisplayName !== songDisplayName) this.setState({
+          currentSongDisplayName: songDisplayName
+        });
+      }
+      if (!this.state.queue || songDisplayName && this.state.currentSongDisplayName !== songDisplayName) {
+        var queueSongs;
+        if (this.props.state.entities.songs.all_songs) queueSongs = Object.values(this.props.state.entities.songs.all_songs);
+        var queueOrder;
+        if (queueSongs && this.props.currentSong) {
+          this.setState({
+            queueIndex: 0
+          });
+          var userSongs = queueSongs.filter(function (song) {
+            return song.display_name === _this3.props.currentSong.display_name;
+          });
+          var currentSongId;
+          if (this.props.currentSong.id) currentSongId = userSongs.findIndex(function (obj) {
+            return obj.id === _this3.props.currentSong.id;
+          });
+          userSongs.unshift(userSongs.splice(currentSongId, 1)[0]);
+          var otherSongs = queueSongs.filter(function (song) {
+            return song.display_name !== _this3.props.currentSong.display_name;
+          });
+          queueOrder = userSongs.concat(otherSongs);
+          this.setState({
+            queue: queueOrder
+          });
+        }
+      }
+      if (!this.state.listener && document.getElementById('myAudio')) {
+        var song = document.getElementById('myAudio');
+        this.setState({
+          listener: true
+        });
+        song.addEventListener('ended', function () {
+          if (_this3.state.repeat) {
+            return _this3.props.getSong(_this3.state.queue[_this3.state.queueIndex].id).then(song.play());
+          }
+          if (_this3.state.shuffle) {
+            return _this3.props.getSong(_this3.state.queue[Math.floor(Math.random() * _this3.state.queue.length)].id).then(song.play());
+          }
+          _this3.setState({
+            queueIndex: _this3.state.queueIndex += 1
+          });
+          _this3.props.getSong(_this3.state.queue[_this3.state.queueIndex].id).then(song.play());
+        });
+      }
+    }
+  }, {
     key: "play",
     value: function play() {
       var audioEle = document.getElementById('myAudio');
@@ -1375,64 +1467,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      var _this2 = this;
-      var songDisplayName;
-      if (this.props.currentSong) {
-        songDisplayName = this.props.currentSong.display_name;
-        if (songDisplayName && this.state.currentSongDisplayName !== songDisplayName) this.setState({
-          currentSongDisplayName: songDisplayName
-        });
-      }
-      if (!this.state.queue || songDisplayName && this.state.currentSongDisplayName !== songDisplayName) {
-        var queueSongs;
-        if (this.props.state.entities.songs.all_songs) queueSongs = Object.values(this.props.state.entities.songs.all_songs);
-        var queueOrder;
-        if (queueSongs && this.props.currentSong) {
-          this.setState({
-            queueIndex: 0
-          });
-          var userSongs = queueSongs.filter(function (song) {
-            return song.display_name === _this2.props.currentSong.display_name;
-          });
-          var currentSongId;
-          if (this.props.currentSong.id) currentSongId = userSongs.findIndex(function (obj) {
-            return obj.id === _this2.props.currentSong.id;
-          });
-          userSongs.unshift(userSongs.splice(currentSongId, 1)[0]);
-          var otherSongs = queueSongs.filter(function (song) {
-            return song.display_name !== _this2.props.currentSong.display_name;
-          });
-          queueOrder = userSongs.concat(otherSongs);
-          this.setState({
-            queue: queueOrder
-          });
-        }
-      }
-      if (!this.state.listener && document.getElementById('myAudio')) {
-        var song = document.getElementById('myAudio');
-        this.setState({
-          listener: true
-        });
-        song.addEventListener('ended', function () {
-          if (_this2.state.repeat) {
-            return _this2.props.getSong(_this2.state.queue[_this2.state.queueIndex].id).then(song.play());
-          }
-          if (_this2.state.shuffle) {
-            return _this2.props.getSong(_this2.state.queue[Math.floor(Math.random() * _this2.state.queue.length)].id).then(song.play());
-          }
-          _this2.setState({
-            queueIndex: _this2.state.queueIndex += 1
-          });
-          _this2.props.getSong(_this2.state.queue[_this2.state.queueIndex].id).then(song.play());
-        });
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
       var song;
       var artist_name;
       var song_title;
@@ -1464,7 +1501,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "range",
         onChange: function onChange(e) {
-          _this3.changeVolume(e);
+          _this4.changeVolume(e);
         },
         id: "vol",
         name: "vol",
@@ -1619,7 +1656,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           hidden: true,
           src: song,
           onTimeUpdate: function onTimeUpdate() {
-            _this3.getCurrentTime();
+            _this4.getCurrentTime();
           }
         })));
       }
@@ -1627,7 +1664,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   }]);
   return MusicPlayer;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-/* harmony default export */ __webpack_exports__["default"] = (MusicPlayer);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])()(MusicPlayer));
 
 /***/ }),
 
@@ -4320,10 +4357,10 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
       }
       window.lastInteractedTile = this;
       if (this.props.currentSong && this.props.currentSong.id === this.props.song.id) {
-        if (audioEle.paused) {
-          audioEle.play();
-        } else {
+        if (this.props.isPlaying) {
           audioEle.pause();
+        } else {
+          audioEle.play();
         }
       } else {
         this.props.getSong(this.props.song.id);
@@ -4408,11 +4445,11 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
           });
           if (audioEle.paused) {
             _this2.setState({
-              playing: false
+              isPlaying: false
             });
           } else {
             _this2.setState({
-              playing: true
+              isPlaying: true
             });
           }
         };
@@ -4460,16 +4497,15 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getPausedPlay",
     value: function getPausedPlay() {
-      var audioEle = document.getElementById('myAudio');
-      var isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
+      var isCurrentSong = this.props.currentSong && this.props.currentSong.id === this.props.song.id;
       if (this.props.profile) {
-        if (isCurrentSong && audioEle && !audioEle.paused) {
+        if (isCurrentSong && this.props.isPlaying) {
           return "pause";
         }
         return "play";
       }
       if (this.state.isTouched || !this.state.isMediumDevice && this.state.isHovered) {
-        if (isCurrentSong && audioEle && !audioEle.paused) {
+        if (isCurrentSong && this.props.isPlaying) {
           return "pause";
         }
         return "play";
@@ -4477,7 +4513,7 @@ var SongPart = /*#__PURE__*/function (_React$Component) {
       if (!isCurrentSong) {
         return "";
       }
-      if (audioEle && !audioEle.paused) {
+      if (this.props.isPlaying) {
         return this.state.wasLastInteracted ? "pause" : "";
       }
       return "";
@@ -4709,7 +4745,8 @@ var mSTP = function mSTP(state) {
     songs: state.entities.songs.songs,
     state: state,
     currentUser: state.session.currentUser,
-    currentSong: state.session.currentSong
+    currentSong: state.session.currentSong,
+    isPlaying: state.session.isPlaying
   };
 };
 var mDTP = function mDTP(dispatch) {
@@ -4908,7 +4945,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _nullSession = {
-  id: null
+  id: null,
+  isPlaying: false,
+  currentSong: null
 };
 var sessionReducer = function sessionReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullSession;
@@ -4924,6 +4963,10 @@ var sessionReducer = function sessionReducer() {
     case _actions_song_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SONG"]:
       return Object.assign({}, state, {
         currentSong: action.song
+      });
+    case 'SET_IS_PLAYING':
+      return Object.assign({}, state, {
+        isPlaying: action.isPlaying
       });
     default:
       return state;

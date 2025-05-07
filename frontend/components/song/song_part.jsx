@@ -34,10 +34,10 @@ class SongPart extends React.Component {
       window.lastInteractedTile = this
 
       if (this.props.currentSong && this.props.currentSong.id === this.props.song.id) {
-        if (audioEle.paused) {
-          audioEle.play()
-        } else {
+        if (this.props.isPlaying) {
           audioEle.pause()
+        } else {
+          audioEle.play()
         }
       } else {
         this.props.getSong(this.props.song.id)
@@ -92,9 +92,9 @@ class SongPart extends React.Component {
           let formattedTime = minutes + ":" + seconds
           this.setState({ songTime: formattedTime })
           if (audioEle.paused) {
-            this.setState({playing: false})
+            this.setState({isPlaying: false})
           } else {
-            this.setState({playing: true})
+            this.setState({isPlaying: true})
           }
         }
       }
@@ -135,31 +135,25 @@ class SongPart extends React.Component {
     }
 
     getPausedPlay() {
-      const audioEle = document.getElementById('myAudio');
-      const isCurrentSong = this.props.currentSong && this.props.currentSong.songUrl === this.props.song.songUrl;
-
+      const isCurrentSong = this.props.currentSong && this.props.currentSong.id === this.props.song.id;
       if (this.props.profile) {
-        if (isCurrentSong && audioEle && !audioEle.paused) {
+        if (isCurrentSong && this.props.isPlaying) {
           return "pause";
         }
         return "play";
       }
-
       if (this.state.isTouched || (!this.state.isMediumDevice && this.state.isHovered)) {
-        if (isCurrentSong && audioEle && !audioEle.paused) {
+        if (isCurrentSong && this.props.isPlaying) {
           return "pause";
         }
         return "play";
       }
-      
       if (!isCurrentSong) {
         return "";
       }
-      
-      if (audioEle && !audioEle.paused) {
+      if (this.props.isPlaying) {
         return this.state.wasLastInteracted ? "pause" : "";
       }
-      
       return "";
     }
 
@@ -236,16 +230,17 @@ class SongPart extends React.Component {
         return (
           <>
           <div className="songTile" 
-               onMouseEnter={() => this.setState({ isHovered: true })}
-               onMouseLeave={() => {
-                 this.setState({ isHovered: false });
-                 if (!('ontouchstart' in window)) {
-                   this.setState({ isTouched: false });
-                 }
-               }}
-               onTouchStart={this.handleTouchStart}
-               onTouchEnd={this.handleTouchEnd}
-               onClick={this.handleTouchStart}>
+              onMouseEnter={() => this.setState({ isHovered: true })}
+              onMouseLeave={() => {
+                this.setState({ isHovered: false });
+                if (!('ontouchstart' in window)) {
+                  this.setState({ isTouched: false });
+                }
+              }}
+              onTouchStart={this.handleTouchStart}
+              onTouchEnd={this.handleTouchEnd}
+              onClick={this.handleTouchStart}
+              >
             {song.pictureUrl ? (
                 <img src={song.pictureUrl} height="180px" width="180px"/>
                 ) : (

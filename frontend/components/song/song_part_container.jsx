@@ -6,7 +6,8 @@ const mSTP = state => ({
   songs: state.entities.songs.songs,
   state: state,
   currentUser: state.session.currentUser,
-  currentSong: state.session.currentSong
+  currentSong: state.session.currentSong,
+  isPlaying: state.session.isPlaying
 });
 
 const mDTP = (dispatch) => ({

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class MusicPlayer extends React.Component {
     constructor(props) {
@@ -34,6 +35,59 @@ class MusicPlayer extends React.Component {
         this.repeatQueue = this.repeatQueue.bind(this);
         this.shuffleQueue = this.shuffleQueue.bind(this);
         this.handleBarClick = this.handleBarClick.bind(this);
+    }
+
+    componentDidMount() {
+        const audioEle = document.getElementById('myAudio');
+        if (audioEle) {
+            audioEle.onplay = () => this.props.dispatch({ type: 'SET_IS_PLAYING', isPlaying: true });
+            audioEle.onpause = () => this.props.dispatch({ type: 'SET_IS_PLAYING', isPlaying: false });
+        }
+    }
+
+    componentDidUpdate() {
+        const audioEle = document.getElementById('myAudio');
+        if (audioEle) {
+            audioEle.onplay = () => this.props.dispatch({ type: 'SET_IS_PLAYING', isPlaying: true });
+            audioEle.onpause = () => this.props.dispatch({ type: 'SET_IS_PLAYING', isPlaying: false });
+        }
+        let songDisplayName
+        if (this.props.currentSong) {
+            songDisplayName = this.props.currentSong.display_name
+            if (songDisplayName && this.state.currentSongDisplayName !== songDisplayName) this.setState({currentSongDisplayName: songDisplayName})
+        }
+
+        if (!this.state.queue || songDisplayName && this.state.currentSongDisplayName !== songDisplayName) {
+            let queueSongs
+            if (this.props.state.entities.songs.all_songs) queueSongs = Object.values(this.props.state.entities.songs.all_songs)
+            let queueOrder
+            if (queueSongs && this.props.currentSong) {
+                this.setState({queueIndex: 0})
+                let userSongs = queueSongs.filter((song) => song.display_name === this.props.currentSong.display_name)
+                let currentSongId
+                if (this.props.currentSong.id) currentSongId = userSongs.findIndex(obj => obj.id === this.props.currentSong.id)
+                userSongs.unshift(userSongs.splice(currentSongId, 1)[0])
+                let otherSongs = queueSongs.filter((song) => song.display_name !== this.props.currentSong.display_name)
+                queueOrder = userSongs.concat(otherSongs)
+                this.setState({queue: queueOrder})
+            }
+        }
+
+        if (!this.state.listener && document.getElementById('myAudio')) {
+            let song = document.getElementById('myAudio')
+            this.setState({listener: true})
+            song.addEventListener('ended', () => {
+                if (this.state.repeat) {
+                    return this.props.getSong(this.state.queue[this.state.queueIndex].id).then(song.play());
+                }
+
+                if (this.state.shuffle) {
+                    return this.props.getSong(this.state.queue[Math.floor(Math.random() * this.state.queue.length)].id).then(song.play());
+                }
+                this.setState({queueIndex: this.state.queueIndex += 1})
+                this.props.getSong(this.state.queue[this.state.queueIndex].id).then(song.play())
+            })
+        }
     }
 
     play() {
@@ -159,46 +213,6 @@ class MusicPlayer extends React.Component {
         if (audioEle && audioEle.duration) {
             const newTime = (clickX / rect.width) * audioEle.duration;
             audioEle.currentTime = newTime;
-        }
-    }
-
-    componentDidUpdate() {
-        let songDisplayName
-        if (this.props.currentSong) {
-            songDisplayName = this.props.currentSong.display_name
-            if (songDisplayName && this.state.currentSongDisplayName !== songDisplayName) this.setState({currentSongDisplayName: songDisplayName})
-        }
-
-        if (!this.state.queue || songDisplayName && this.state.currentSongDisplayName !== songDisplayName) {
-            let queueSongs
-            if (this.props.state.entities.songs.all_songs) queueSongs = Object.values(this.props.state.entities.songs.all_songs)
-            let queueOrder
-            if (queueSongs && this.props.currentSong) {
-                this.setState({queueIndex: 0})
-                let userSongs = queueSongs.filter((song) => song.display_name === this.props.currentSong.display_name)
-                let currentSongId
-                if (this.props.currentSong.id) currentSongId = userSongs.findIndex(obj => obj.id === this.props.currentSong.id)
-                userSongs.unshift(userSongs.splice(currentSongId, 1)[0])
-                let otherSongs = queueSongs.filter((song) => song.display_name !== this.props.currentSong.display_name)
-                queueOrder = userSongs.concat(otherSongs)
-                this.setState({queue: queueOrder})
-            }
-        }
-
-        if (!this.state.listener && document.getElementById('myAudio')) {
-            let song = document.getElementById('myAudio')
-            this.setState({listener: true})
-            song.addEventListener('ended', () => {
-                if (this.state.repeat) {
-                    return this.props.getSong(this.state.queue[this.state.queueIndex].id).then(song.play());
-                }
-
-                if (this.state.shuffle) {
-                    return this.props.getSong(this.state.queue[Math.floor(Math.random() * this.state.queue.length)].id).then(song.play());
-                }
-                this.setState({queueIndex: this.state.queueIndex += 1})
-                this.props.getSong(this.state.queue[this.state.queueIndex].id).then(song.play())
-            })
         }
     }
 
@@ -330,4 +344,4 @@ class MusicPlayer extends React.Component {
     }
 }
 
-export default MusicPlayer;
+export default connect()(MusicPlayer);

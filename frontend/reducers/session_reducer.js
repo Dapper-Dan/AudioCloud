@@ -2,7 +2,9 @@ import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER} from "../actions/session_act
 import { RECEIVE_SONG} from "../actions/song_actions";
 
 const _nullSession = {
-  id: null
+  id: null,
+  isPlaying: false,
+  currentSong: null
 };
 
 const sessionReducer = (state = _nullSession, action) => {
@@ -15,6 +17,8 @@ const sessionReducer = (state = _nullSession, action) => {
       return _nullSession;
     case RECEIVE_SONG:
       return Object.assign({}, state, { currentSong: action.song });
+    case 'SET_IS_PLAYING':
+      return Object.assign({}, state, { isPlaying: action.isPlaying });
     default:
       return state;
   }
