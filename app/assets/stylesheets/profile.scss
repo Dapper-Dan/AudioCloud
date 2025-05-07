@@ -357,6 +357,8 @@
     right: 27px;
     border-radius: 3px;
     border: none;
+    color: black;
+    padding: 4px;
 
     @media (min-width: 768px) {
         bottom: 89px;
@@ -371,6 +373,8 @@
     border-radius: 3px;
     border: none;
     width: fit-content;
+    color: black;
+    padding: 4px;
 
     @media (min-width: 768px) {
         left: 56px;
