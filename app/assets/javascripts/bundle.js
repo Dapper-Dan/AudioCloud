@@ -1191,6 +1191,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _this.repeatQueue = _this.repeatQueue.bind(_assertThisInitialized(_this));
     _this.shuffleQueue = _this.shuffleQueue.bind(_assertThisInitialized(_this));
     _this.handleBarClick = _this.handleBarClick.bind(_assertThisInitialized(_this));
+    _this.handleTouchStart = _this.handleTouchStart.bind(_assertThisInitialized(_this));
+    _this.handleTouchMove = _this.handleTouchMove.bind(_assertThisInitialized(_this));
+    _this.handleTouchEnd = _this.handleTouchEnd.bind(_assertThisInitialized(_this));
     return _this;
   }
   _createClass(MusicPlayer, [{
@@ -1329,8 +1332,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "drag",
     value: function drag(e) {
+      var clientX = e.clientX !== undefined ? e.clientX : e.pageX;
       var progressLine = document.querySelector('.song-bar');
-      var divAdjust = e.pageX - progressLine.offsetLeft;
+      var divAdjust = clientX - progressLine.offsetLeft;
       var newWidth = Math.floor(divAdjust / progressLine.offsetWidth * 100);
       if (this.state.mouseDown) {
         this.setState({
@@ -1467,6 +1471,46 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "handleTouchStart",
+    value: function handleTouchStart(e) {
+      e.preventDefault();
+      this.setState({
+        mouseDown: true
+      });
+      document.addEventListener('touchmove', this.handleTouchMove, {
+        passive: false
+      });
+      document.addEventListener('touchend', this.handleTouchEnd, {
+        passive: false
+      });
+      this.drag(e.touches[0]);
+    }
+  }, {
+    key: "handleTouchMove",
+    value: function handleTouchMove(e) {
+      e.preventDefault();
+      if (!this.state.mouseDown) return;
+      this.drag(e.touches[0]);
+    }
+  }, {
+    key: "handleTouchEnd",
+    value: function handleTouchEnd(e) {
+      e.preventDefault();
+      this.setState({
+        mouseDown: false
+      });
+      document.removeEventListener('touchmove', this.handleTouchMove);
+      document.removeEventListener('touchend', this.handleTouchEnd);
+      var song = document.getElementById('myAudio');
+      var progressLine = document.querySelector('.song-bar');
+      if (!progressLine) return;
+      var rect = progressLine.getBoundingClientRect();
+      var touch = e.changedTouches[0];
+      var divAdjust = touch.clientX - rect.left;
+      var newTime = Math.floor(divAdjust / rect.width * song.duration);
+      song.currentTime = newTime;
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
@@ -1583,7 +1627,10 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "song-progress-bar-container",
           onClick: this.handleBarClick,
-          onMouseDown: this.handleMouseDown
+          onMouseDown: this.handleMouseDown,
+          onTouchStart: this.handleTouchStart,
+          onTouchMove: this.handleTouchMove,
+          onTouchEnd: this.handleTouchEnd
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "button-container d-none d-md-flex"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {

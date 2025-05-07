@@ -35,6 +35,9 @@ class MusicPlayer extends React.Component {
         this.repeatQueue = this.repeatQueue.bind(this);
         this.shuffleQueue = this.shuffleQueue.bind(this);
         this.handleBarClick = this.handleBarClick.bind(this);
+        this.handleTouchStart = this.handleTouchStart.bind(this);
+        this.handleTouchMove = this.handleTouchMove.bind(this);
+        this.handleTouchEnd = this.handleTouchEnd.bind(this);
     }
 
     componentDidMount() {
@@ -123,13 +126,14 @@ class MusicPlayer extends React.Component {
     }
 
     drag(e) {
+        let clientX = e.clientX !== undefined ? e.clientX : e.pageX;
         let progressLine = document.querySelector('.song-bar');
-        let divAdjust = e.pageX - progressLine.offsetLeft;  
+        let divAdjust = clientX - progressLine.offsetLeft;
         let newWidth = Math.floor((divAdjust / progressLine.offsetWidth) * 100);
-  
+
         if (this.state.mouseDown) {
-            this.setState({ currentTime: newWidth })
-            document.querySelector('.song-progress-bar').style.width = `${newWidth}%`
+            this.setState({ currentTime: newWidth });
+            document.querySelector('.song-progress-bar').style.width = `${newWidth}%`;
         }
     }
 
@@ -214,6 +218,35 @@ class MusicPlayer extends React.Component {
             const newTime = (clickX / rect.width) * audioEle.duration;
             audioEle.currentTime = newTime;
         }
+    }
+
+    handleTouchStart(e) {
+        e.preventDefault();
+        this.setState({ mouseDown: true });
+        document.addEventListener('touchmove', this.handleTouchMove, { passive: false });
+        document.addEventListener('touchend', this.handleTouchEnd, { passive: false });
+        this.drag(e.touches[0]);
+    }
+
+    handleTouchMove(e) {
+        e.preventDefault();
+        if (!this.state.mouseDown) return;
+        this.drag(e.touches[0]);
+    }
+
+    handleTouchEnd(e) {
+        e.preventDefault();
+        this.setState({ mouseDown: false });
+        document.removeEventListener('touchmove', this.handleTouchMove);
+        document.removeEventListener('touchend', this.handleTouchEnd);
+        const song = document.getElementById('myAudio');
+        const progressLine = document.querySelector('.song-bar');
+        if (!progressLine) return;
+        const rect = progressLine.getBoundingClientRect();
+        const touch = e.changedTouches[0];
+        const divAdjust = touch.clientX - rect.left;
+        const newTime = Math.floor((divAdjust / rect.width) * song.duration);
+        song.currentTime = newTime;
     }
 
     render() { 
@@ -303,7 +336,13 @@ class MusicPlayer extends React.Component {
                             <img src={window.heart} onClick={this.likeSong} className="heartMedia" id={likeButtonStyle} width="25px" />
                         </div>
                     </div>
-                    <div className="song-progress-bar-container" onClick={this.handleBarClick} onMouseDown={this.handleMouseDown}> 
+                    <div className="song-progress-bar-container"
+                        onClick={this.handleBarClick}
+                        onMouseDown={this.handleMouseDown}
+                        onTouchStart={this.handleTouchStart}
+                        onTouchMove={this.handleTouchMove}
+                        onTouchEnd={this.handleTouchEnd}
+                    >
                         <div className="button-container d-none d-md-flex">
                             <img onClick={this.prevQueue} src={window.back} width="21px"/>
                             <button className="play-button" data-playing="false" role="switch" aria-checked="false" onClick={this.play}>
