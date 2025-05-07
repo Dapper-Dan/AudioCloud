@@ -32,6 +32,10 @@
     position: relative;
     justify-content: space-between;
     margin-bottom: 180px;
+
+    @media (min-width: 768px) {
+        margin-bottom: 0;
+    }
 }
 
 .current-user-cover {
