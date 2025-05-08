@@ -112,11 +112,15 @@
     }
 }
 
+.song-bar-container {
+    max-width: 500px;
+}
+
 .song-bar {
     height: 1px;
     display: flex;
     background-color: rgb(202, 201, 201);
-    width: 500px;
+    width: 100%;
     margin: auto;
     margin-left: 0px;
     margin-right: 0px;

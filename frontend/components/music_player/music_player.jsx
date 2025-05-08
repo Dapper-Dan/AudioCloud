@@ -336,13 +336,7 @@ class MusicPlayer extends React.Component {
                             <img src={window.heart} onClick={this.likeSong} className="heartMedia" id={likeButtonStyle} width="25px" />
                         </div>
                     </div>
-                    <div className="song-progress-bar-container"
-                        onClick={this.handleBarClick}
-                        onMouseDown={this.handleMouseDown}
-                        onTouchStart={this.handleTouchStart}
-                        onTouchMove={this.handleTouchMove}
-                        onTouchEnd={this.handleTouchEnd}
-                    >
+                    <div className="song-progress-bar-container">
                         <div className="button-container d-none d-md-flex">
                             <img onClick={this.prevQueue} src={window.back} width="21px"/>
                             <button className="play-button" data-playing="false" role="switch" aria-checked="false" onClick={this.play}>
@@ -355,12 +349,19 @@ class MusicPlayer extends React.Component {
                         <div className="current-time">
                             {this.state.songTime}
                         </div>
-                        <div className="song-bar">
-                            <div className="song-progress-bar" style={{width:`${this.state.currentTime}%`}}>
+                        <div className='song-bar-container w-100 d-flex align-items-center'
+                            onClick={this.handleBarClick}
+                            onMouseDown={this.handleMouseDown}
+                            onTouchStart={this.handleTouchStart}
+                            onTouchMove={this.handleTouchMove}
+                            onTouchEnd={this.handleTouchEnd}>
+                            <div className="song-bar">
+                                <div className="song-progress-bar" style={{width:`${this.state.currentTime}%`}}>
+                                </div>
+                                <div className="bar-dot">
+                                </div>
                             </div>
-                            <div className="bar-dot">
-                            </div>
-                        </div> 
+                        </div>
                         <div className="end-time">
                             {endTime}
                         </div>
