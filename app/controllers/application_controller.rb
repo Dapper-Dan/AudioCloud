@@ -2,7 +2,16 @@ class ApplicationController < ActionController::Base
     skip_before_action :verify_authenticity_token
     helper_method :current_user, :logged_in?
   
+    if Rails.env.development? || Rails.env.production?
+        before_action :allow_iframe_from_localhost
+    end
+  
     private
+  
+    def allow_iframe_from_localhost
+        response.headers.delete('X-Frame-Options')
+        response.headers['Content-Security-Policy'] = "frame-ancestors 'self' http://localhost:3000"
+    end
   
     def current_user
         return nil unless session[:session_token]
