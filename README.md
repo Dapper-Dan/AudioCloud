@@ -87,7 +87,12 @@ Here are some code snippets that show how the discover page sorts through tracks
     }
 ```
 
+## 2025
+
+As of 2025 we are mobile friendly!
+![AudioCloud mobile](https://github.com/Dapper-Dan/AudioCloud/blob/master/app/assets/images/mobileCap.jpeg)
+
 ## Contact
 [LinkedIn](https://www.linkedin.com/in/daniel-r-lancaster/)
 <br>
-[Email](mailto:dlancaster08@gmail.com)
+[Email](mailto:daniel.ray.lancaster@gmail.com)
