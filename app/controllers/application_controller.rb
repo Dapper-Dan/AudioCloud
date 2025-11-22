@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   
     def allow_iframe_from_localhost
         response.headers.delete('X-Frame-Options')
-        response.headers['Content-Security-Policy'] = "frame-ancestors 'self' http://localhost:3000"
+        response.headers['Content-Security-Policy'] = "frame-ancestors 'self' http://localhost:3000 https://www.daniellancaster.dev/"
     end
   
     def current_user
